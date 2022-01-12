@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
+use http\Client\Request;
 
 class PageController extends Controller
 {
@@ -93,5 +94,9 @@ class PageController extends Controller
         return view('Frontend.index')->with('category',$menu)->with('all',$all)->with('active',$Cat);
     }
 
+    public function basic_details()
+    {
+      return view('Frontend.Apply.basic_details');
+    }
 
 }

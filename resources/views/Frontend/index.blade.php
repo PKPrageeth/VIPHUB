@@ -93,7 +93,7 @@
                 </div>
                 @foreach($category as $item)
                     <div class="col d-flex justify-content-center mt-2">
-                        <a href="/{{$item['insuranceCategory']}}"
+                        <a href="/index/{{$item['insuranceCategory']}}"
                            class="w-100 d-flex justify-content-center text-decoration-none">
                             <button
                                 class="btn btn-block w-100 @if($active==$item['insuranceCategory'])btn-warning @else btn-outline-warning @endif ">   {{$item['insuranceCategory']}}</button>
@@ -156,7 +156,10 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Buy Now</button>
+                            <a href="/basic_details" class="btn btn-primary">
+                                Buy Now
+                            </a>
+
                         </div>
                     </div>
                 </div>
