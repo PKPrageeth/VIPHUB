@@ -1,0 +1,10 @@
+.card{
+background: #1a202c;
+}
+footer{
+    border-top:2px solid #b8530b;
+    background: #151923;
+}
+a{
+    cursor: pointer;
+}
