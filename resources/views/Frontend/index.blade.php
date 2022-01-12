@@ -111,6 +111,7 @@
 <div class="container mt-5">
     <div class="row">
         @foreach($all as $item)
+
             <div class="col-md-3 col-6 d-flex align-items-stretch">
 
                 <div class="card mb-3 w-100">
