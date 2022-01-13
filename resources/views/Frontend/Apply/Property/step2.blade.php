@@ -241,7 +241,7 @@
                 <div class="row">
                     <div class="col-md-8"></div>
                     <div class="col-md-2 col-6"><a href="/" class="btn w-100 btn-danger btn-round"
-                                                   type="button">Cancle</a></div>
+                                                   type="button">Cancel</a></div>
                     <div class="col-md-2 col-6">
                         <button class="btn w-100 btn-warning btn-round" type="submit">Next</button>
                     </div>
