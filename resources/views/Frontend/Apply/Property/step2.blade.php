@@ -59,7 +59,7 @@
             <h3>Description of the building</h3>
         </div>
         <div class="card-body">
-            <form class="needs-validation" action="/step2" method="post" novalidate>
+            <form class="needs-validation" action="{{url("/step2")}}" method="post" novalidate>
                 @csrf
                 <div class="row">
 

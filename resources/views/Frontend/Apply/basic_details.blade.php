@@ -59,7 +59,7 @@
             <h3>Basic Details</h3>
         </div>
         <div class="card-body">
-            <form class="needs-validation" action="/Gedara/basic_details" novalidate>
+            <form class="needs-validation" action="{{url("/Gedara/basic_details")}}" novalidate>
                 <div class="row">
                     <div class="col-md-2 mb-3">
                         <label for="validationCustom02">Title</label>
