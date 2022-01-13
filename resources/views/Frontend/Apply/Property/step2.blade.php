@@ -83,9 +83,10 @@
 
 
                     </div>
+                    <div class="col-md-6"></div>
                     <div class="col-md-6 mb-3">
                         <div class="row">
-                            <div class="col-md-4"><label for="validationCustom01">Walls</label></div>
+                            <div class="col-md-4"><label for="validationCustom01">Roof</label></div>
                             <div class="col-md-8">
                                 <div class="form-check form-check-inline">
                                     <input name="roof" type="radio" class="form-check-input" id="validationCustom01"
@@ -108,7 +109,7 @@
 
 
                     </div>
-
+                    <div class="col-md-6"></div>
 
                 </div>
                 <div class="row">
@@ -143,9 +144,10 @@
 
 
                     </div>
+                    <div class="col-md-6"></div>
                     <div class="col-md-6 mb-3">
                         <div class="row">
-                            <div class="col-md-4"><label for="validationCustom01">Ceiling made of</label></div>
+                            <div class="col-md-4"><label for="validationCustom01">Lit by</label></div>
                             <div class="col-md-8">
                                 <div class="form-check form-check-inline">
                                     <input name="roof" type="radio" class="form-check-input" id="validationCustom01"
@@ -174,7 +176,7 @@
 
 
                     </div>
-
+                    <div class="col-md-6"></div>
                 </div>
                 <div class="row">
                     <div class="card" id="item-holder">

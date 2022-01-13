@@ -39,7 +39,7 @@ $(document).ready(function () {
             "                                    <label class=\"form-check-label mobile_label\" for=\"flexSwitchCheckDefault\">FOR BURGLARY COVER UPTO RS:300,000/= (PLEASE TICK)</label>\n" +
             "                                    <div class=\"form-check form-switch\">\n" +
             "\n" +
-            "                                        <input  class=\"form-check-input\" value='Yes' type=\"checkbox\" id=\"ch0\" onclick=\"tick("+counts+")\">\n" +
+            "                                        <input  class=\"form-check-input\" value='Yes' type=\"checkbox\" id=\"ch"+counts+"\" onclick=\"tick("+counts+")\">\n" +
             "                                       <input id='tik"+counts+"' type='hidden' value='0' name='tick[]'>" +
             "\n" +
             "                                    </div>" +
@@ -63,7 +63,7 @@ function remove(id) {
 }
 
 function tick(id){
-    alert(id)
+
     var checkBox = document.getElementById("ch"+id);
     if (checkBox.checked == true){
        $('#tik'+id).val("1");
