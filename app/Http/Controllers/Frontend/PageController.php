@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
-use http\Client\Request;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -98,5 +98,15 @@ class PageController extends Controller
     {
       return view('Frontend.Apply.basic_details');
     }
+    public function Gedara_step1()
+    {
+      return view('Frontend.Apply.Property.step2');
+    }
+    public function step2(Request $request)
+    {
+     dd($request);
+    }
+
+
 
 }

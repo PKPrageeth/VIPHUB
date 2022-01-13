@@ -59,12 +59,12 @@
             <h3>Basic Details</h3>
         </div>
         <div class="card-body">
-            <form class="needs-validation" action="/Gedara/basic_details" novalidate>
+            <form class="needs-validation" novalidate>
                 <div class="row">
                     <div class="col-md-2 mb-3">
                         <label for="validationCustom02">Title</label>
                         <select class="form-select" id="validationCustom02" required>
-                            <option value="0" selected disabled hidden>Please Select Title</option>
+
                             <option value="1">Dr.</option>
                             <option value="2">Hon.</option>
                             <option value="3">Mr.</option>
@@ -148,7 +148,7 @@
                         // Fetch all the forms we want to apply custom Bootstrap validation styles to
                         var forms = document.getElementsByClassName('needs-validation');
                         const title = document.getElementById('validationCustom02');
-                        console.log(title.value)
+
                         // Loop over them and prevent submission
                         var validation = Array.prototype.filter.call(forms, function(form) {
                             form.addEventListener('submit', function(event) {

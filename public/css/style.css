@@ -1,10 +1,103 @@
-.card{
-background: #1a202c;
+.card {
+    background: #1a202c;
 }
-footer{
-    border-top:2px solid #b8530b;
+
+footer {
+    border-top: 2px solid #b8530b;
     background: #151923;
 }
-a{
+
+a {
     cursor: pointer;
 }
+
+.btn-round {
+    border-radius: 25px;
+
+}
+
+.footer-fix-bottom {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+}
+.mobile_label{
+    display: none;
+
+}
+
+/*@media only screen and (max-width: 600px) {*/
+/*    .footer-fix-bottom {*/
+/*        position: relative;*/
+/*        left: 0;*/
+/*        bottom: 0;*/
+/*        width: 100%;*/
+
+/*    }*/
+/*}*/
+
+@media only screen and (max-width: 768px) {
+
+        .footer-fix-bottom {
+            position: relative;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+
+
+    }
+    .mobile_label{
+        display: block;
+
+    }
+
+}
+@media only screen and (max-height: 600px) {
+
+        .footer-fix-bottom {
+            position: relative;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+
+
+    }
+    .mobile_label{
+        display: block;
+
+    }
+
+}
+@media (min-height: 768px) and (min-width: 600px) {
+    .footer-fix-bottom {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+
+    }
+}
+.item-card{
+    border-bottom: 1px solid #b8530b;
+}
+
+
+.row.flex {
+    display: flex;
+    align-items: flex-end;
+}
+
+@media (max-width: 767px) {
+    .row.flex .col-xs-6 {
+        width: 100%;
+    }
+    label {
+        margin-top: 5px;
+    }
+    .row.flex {
+        flex-flow: wrap;
+    }
+}
+

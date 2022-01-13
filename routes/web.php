@@ -20,4 +20,6 @@ Route::get('/hhhh', function () {
 Route::get('/', [App\Http\Controllers\Frontend\PageController::class, 'indexPage']);
 Route::get('/index/{var}', [App\Http\Controllers\Frontend\PageController::class, 'categoryLoad']);
 Route::get('/basic_details', [App\Http\Controllers\Frontend\PageController::class, 'basic_details']);
+Route::get('/Gedara/basic_details', [App\Http\Controllers\Frontend\PageController::class, 'Gedara_step1']);
+Route::post('/step2', [App\Http\Controllers\Frontend\PageController::class, 'step2']);
 
