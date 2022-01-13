@@ -104,7 +104,8 @@ class PageController extends Controller
     }
     public function step2(Request $request)
     {
-     dd($request);
+//     dd($request);
+        return view('Frontend.Apply.Property.step3');
     }
 
 

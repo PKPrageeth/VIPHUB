@@ -213,8 +213,8 @@
                                 </div>
 
                                 <div class="col-md-4 col-lg-2 col-12 mb-3">
-                                    <label name='value[]' for="validationCustom01">VALUE</label>
-                                    <input type="text" class="form-control" id="validationCustom01"
+                                    <label  for="validationCustom01">VALUE</label>
+                                    <input name='value[]' type="text" class="form-control" id="validationCustom01"
                                            placeholder="Mark Anthony"
                                            required>
                                     <div class="invalid-feedback">
@@ -239,7 +239,7 @@
                     </div>
 
                 </div>
-                <button type="button" id="add" class="btn btn-info btn-sm mb-3">ADD ITEM</button>
+                <button type="button" id="add" class="btn btn-info btn-sm mb-3 mt-2">ADD ITEM</button>
                 <div class="row">
                     <div class="col-md-8"></div>
                     <div class="col-md-2 col-6"><a href="/" class="btn w-100 btn-danger btn-round"
