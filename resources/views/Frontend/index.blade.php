@@ -93,7 +93,7 @@
                 </div>
                 @foreach($category as $item)
                     <div class="col d-flex justify-content-center mt-2">
-                        <a href="/index/{{$item['insuranceCategory']}}"
+                        <a href="index/{{$item['insuranceCategory']}}"
                            class="w-100 d-flex justify-content-center text-decoration-none">
                             <button
                                 class="btn btn-block w-100 @if($active==$item['insuranceCategory'])btn-warning @else btn-outline-warning @endif ">   {{$item['insuranceCategory']}}</button>
@@ -117,7 +117,7 @@
                 <div class="card mb-3 w-100">
                     <a class="w-100 text-decoration-none" data-bs-toggle="modal"
                        data-bs-target="#detail_{{$item['sku']}}">
-                        <img src="{{asset('/images/coverimage.jpg')}}" class="card-img-top" alt="...">
+                        <img src="{{$item['policyImageURL']}}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title text-light">{{$item['displayName']}}</h5>
 
