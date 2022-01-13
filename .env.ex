@@ -2,7 +2,7 @@ APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=base64:wY+KXv3sBjZFkDZjzPLeFvD1SkV3T30WP++YAl9ZDUA=
 APP_DEBUG=true
-APP_URL=http://VIPHub.test
+APP_URL=https://pm74.paymediasolutions.com/ceylinco-no-cost-center/VIP_HUP_DEV/VIPHUB/public
 
 LOG_CHANNEL=stack
 LOG_DEPRECATIONS_CHANNEL=null
