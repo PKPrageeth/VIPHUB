@@ -156,7 +156,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <a href="/basic_details" class="btn btn-primary">
+
+                            <a href="{{url("/basic_details") }}" class="btn btn-primary">
                                 Buy Now
                             </a>
 
