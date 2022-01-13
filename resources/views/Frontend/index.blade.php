@@ -138,7 +138,7 @@
                             <div class="card text-light">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <img src="{{asset('/images/coverimage.jpg')}}" class="w-100" alt="...">
+                                        <img src="{{$item['policyImageURL']}}" class="w-100" alt="...">
                                     </div>
                                     <div class="col-md-6">
                                         <h2>{{$item['displayName']}}</h2>
