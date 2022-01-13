@@ -93,7 +93,7 @@
                 </div>
                 @foreach($category as $item)
                     <div class="col d-flex justify-content-center mt-2">
-                        <a href="/index/{{$item['insuranceCategory']}}"
+                        <a href="index/{{$item['insuranceCategory']}}"
                            class="w-100 d-flex justify-content-center text-decoration-none">
                             <button
                                 class="btn btn-block w-100 @if($active==$item['insuranceCategory'])btn-warning @else btn-outline-warning @endif ">   {{$item['insuranceCategory']}}</button>
