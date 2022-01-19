@@ -104,6 +104,7 @@ class PageController extends Controller
         } else if ($product == "ceylinco-serious-illness") {
             return view('Frontend.Apply.SeriousIlness.basic_details')->with('plan',$plan);
         } else if ($product == "ceylinco-hospitalization-cover") {
+            return view('Frontend.Apply.Hospitalization.basic_details')->with('plan',$plan);
         } else if ($product == "ceylinco-serious-illness-visa-card-holders") {
         }
 

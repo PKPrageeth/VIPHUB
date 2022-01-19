@@ -45,7 +45,13 @@ Route::post('/step3/data/thirdparty', [App\Http\Controllers\Frontend\Thirdparty\
 //Seriouse Ilness
 Route::post('/serious-illness/basic_details', [App\Http\Controllers\Frontend\SeriousIlness\SeriousIlnessController::class, 'basic_details']);
 Route::get('/serious-illness/step2', [App\Http\Controllers\Frontend\SeriousIlness\SeriousIlnessController::class, 'step1']);
-Route::post('//step3/data/serious_illness', [App\Http\Controllers\Frontend\SeriousIlness\SeriousIlnessController::class, 'Finlstep']);
+Route::post('/step3/data/serious_illness', [App\Http\Controllers\Frontend\SeriousIlness\SeriousIlnessController::class, 'Finlstep']);
+
+//Seriouse Ilness
+Route::post('/hospitalization/basic_details', [App\Http\Controllers\Frontend\Hospitalization\HospitalizationController::class, 'basic_details']);
+Route::get('/hospitalization/step2', [App\Http\Controllers\Frontend\Hospitalization\HospitalizationController::class, 'step1']);
+Route::post('/step3/data/hospitalization', [App\Http\Controllers\Frontend\Hospitalization\HospitalizationController::class, 'Finlstep']);
+
 
 //response
 Route::get('/success', [App\Http\Controllers\Frontend\PageController::class, 'success']);
