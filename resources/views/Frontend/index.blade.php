@@ -59,13 +59,13 @@
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{asset('/images/slider/slider1.jpg')}}" class="d-block w-100" alt="...">
+            <img src="{{asset('/images/slider/slider1.png')}}" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="{{asset('/images/slider/slider2.jpg')}}" class="d-block w-100" alt="...">
+            <img src="{{asset('/images/slider/slider2.png')}}" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="{{asset('/images/slider/slider3.jpg')}}" class="d-block w-100" alt="...">
+            <img src="{{asset('/images/slider/slider3.png')}}" class="d-block w-100" alt="...">
         </div>
     </div>
     {{--    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">--}}
@@ -122,6 +122,7 @@
                             <h5 class="card-title text-light">{{$item['displayName']}}</h5>
 
                         </div>
+
                         <div class="card-footer">
                             <p class="card-text text-warning d-flex mt-auto">LKR. {{$item['premium']}} </p>
                         </div>
@@ -157,7 +158,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-                            <a href="{{url("/basic_details") }}" class="btn btn-primary">
+                            <a href="{{url("/basic_details/".$item['insurancePolicyId']) }}" class="btn btn-primary">
                                 Buy Now
                             </a>
 

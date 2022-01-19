@@ -39,8 +39,8 @@ $(document).ready(function () {
             "                                    <label class=\"form-check-label mobile_label\" for=\"flexSwitchCheckDefault\">FOR BURGLARY COVER UPTO RS:300,000/= (PLEASE TICK)</label>\n" +
             "                                    <div class=\"form-check form-switch\">\n" +
             "\n" +
-            "                                        <input  class=\"form-check-input\" value='Yes' type=\"checkbox\" id=\"ch"+counts+"\" onclick=\"tick("+counts+")\">\n" +
-            "                                       <input id='tik"+counts+"' type='hidden' value='0' name='tick[]'>" +
+            "                                        <input  class=\"form-check-input\" value='Yes' type=\"checkbox\" id=\"ch" + counts + "\" onclick=\"tick(" + counts + ")\">\n" +
+            "                                       <input id='tik" + counts + "' type='hidden' value='0' name='tick[]'>" +
             "\n" +
             "                                    </div>" +
             "                                </div>\n" +
@@ -55,6 +55,44 @@ $(document).ready(function () {
         $('#item-holder').append(item);
 
     });
+    (function () {
+        var uploader = document.createElement('input'),
+            image = document.getElementById('img-result');
+
+        uploader.type = 'file';
+        uploader.accept = 'image/*';
+
+        image.onclick = function () {
+            uploader.click();
+        }
+
+        uploader.onchange = function () {
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                image.classList.remove('no-image');
+                image.style.backgroundImage = 'url(' + evt.target.result + ')';
+                var request = {
+                    itemtype: 'test 1',
+                    brand: 'test 2',
+                    images: [{
+                        data: evt.target.result
+                    }]
+                };
+
+                document.querySelector('.show-button').style.display = 'block';
+                document.querySelector('.upload-result__content').innerHTML = JSON.stringify(request, null, '  ');
+            }
+            reader.readAsDataURL(uploader.files[0]);
+        }
+
+        document.querySelector('.hide-button').onclick = function () {
+            document.querySelector('.upload-result').style.display = 'none';
+        };
+
+        document.querySelector('.show-button').onclick = function () {
+            document.querySelector('.upload-result').style.display = 'block';
+        };
+    })();
 });
 
 function remove(id) {
@@ -62,13 +100,66 @@ function remove(id) {
     $("#items" + id).remove();
 }
 
-function tick(id){
+function tick(id) {
 
-    var checkBox = document.getElementById("ch"+id);
-    if (checkBox.checked == true){
-       $('#tik'+id).val("1");
+    var checkBox = document.getElementById("ch" + id);
+    if (checkBox.checked == true) {
+        $('#tik' + id).val("1");
     } else {
-        $('#tik'+id).val("0");
+        $('#tik' + id).val("0");
     }
 
 }
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('.image-upload-wrap').hide();
+
+            $('.file-upload-image').attr('src', e.target.result);
+            $('.file-upload-content').show();
+
+            $('.image-title').html(input.files[0].name);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+
+    } else {
+        removeUpload();
+    }
+}function readURLNICb(input) {
+    if (input.files && input.files[0]) {
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('.image-upload-wrap1').hide();
+
+            $('.file-upload-image1').attr('src', e.target.result);
+            $('.file-upload-content1').show();
+
+            $('.image-title1').html(input.files[0].name);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+
+    } else {
+        removeUpload();
+    }
+}
+
+function removeUpload() {
+    $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+    $('.file-upload-content').hide();
+    $('.image-upload-wrap').show();
+}
+
+$('.image-upload-wrap').bind('dragover', function () {
+    $('.image-upload-wrap').addClass('image-dropping');
+});
+$('.image-upload-wrap').bind('dragleave', function () {
+    $('.image-upload-wrap').removeClass('image-dropping');
+});

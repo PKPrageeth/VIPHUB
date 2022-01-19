@@ -59,7 +59,7 @@
             <h3>Basic Details</h3>
         </div>
         <div class="card-body">
-            <form method="post" class="needs-validation" action="{{url("/Gedara/basic_details")}}" novalidate>
+            <form method="post" class="needs-validation" action="{{url("/thirdparty/basic_details")}}" novalidate>
                 @csrf
                 <div class="row">
                     <div class="col-md-2 mb-3">
@@ -88,6 +88,29 @@
 
                 </div>
                 <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="validationCustom03">Permanent Address Line1</label>
+                        <input type="text" name="address1" class="form-control" id="validationCustom03"  required>
+                        <div class="invalid-feedback">
+                            Please provide a valid Permanent Address Line1.
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="validationCustom04">Permanent Address Line2</label>
+                        <input type="text" name="address2" class="form-control" id="validationCustom04" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid Permanent Address Line2.
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="validationCustom05">Permanent Address Line3</label>
+                        <input type="text" name="address3" class="form-control" id="validationCustom05"   required>
+                        <div class="invalid-feedback">
+                            Please provide a valid Permanent Address Line3.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="validationCustom03">Email</label>
                         <input type="email" name="email" class="form-control" id="validationCustom03" placeholder="abc@abc.com" required>
@@ -111,11 +134,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom05">Name of Mortgagee</label>
-                        <input type="text" name="mortgagee" class="form-control" id="validationCustom05" >
 
-                    </div>
                     <div class="col-md-6 mb-3">
                         <label for="validationCustom03">Date Of Birth</label>
                         <input type="Date" name="dob" class="form-control" id="validationCustom03"  required>
@@ -126,18 +145,7 @@
 
 
                 </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom04">Permanent Address</label>
-                        <textarea name="address" class="form-control" id="validationCustom04" placeholder="Address"  required>
 
-                        </textarea>
-
-                        <div class="invalid-feedback">
-                            Please provide a valid Permanent Address.
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-md-8"></div>
                     <div class="col-md-2 col-6"><a href="/" class="btn w-100 btn-danger btn-round" type="button">Cancel</a></div>

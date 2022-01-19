@@ -59,7 +59,7 @@
             <h3>Description of the building</h3>
         </div>
         <div class="card-body">
-            <form class="needs-validation" action="{{url("/step2")}}" method="post" novalidate>
+            <form class="needs-validation" action="{{url("/step2/data/gedara")}}" method="post" novalidate>
                 @csrf
                 <div class="row">
 
@@ -118,22 +118,22 @@
                             <div class="col-md-4"><label for="validationCustom01">Ceiling made of</label></div>
                             <div class="col-md-8">
                                 <div class="form-check form-check-inline">
-                                    <input name="roof" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="ceiling" type="radio" class="form-check-input" id="validationCustom01"
                                            value="Asbestos" placeholder="Briks" required>
                                     <label class="form-check-label" for="inlineRadio1">Asbestos</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="roof" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="ceiling" type="radio" class="form-check-input" id="validationCustom01"
                                            value="Plastic" placeholder="Briks" required>
                                     <label class="form-check-label" for="inlineRadio2">Plastic</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="roof" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="ceiling" type="radio" class="form-check-input" id="validationCustom01"
                                            value="Wood" placeholder="Briks" required>
                                     <label class="form-check-label" for="inlineRadio2">Wood</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="roof" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="ceiling" type="radio" class="form-check-input" id="validationCustom01"
                                            value="None" placeholder="Briks" required>
                                     <label class="form-check-label" for="inlineRadio2">None</label>
                                 </div>
@@ -150,22 +150,22 @@
                             <div class="col-md-4"><label for="validationCustom01">Lit by</label></div>
                             <div class="col-md-8">
                                 <div class="form-check form-check-inline">
-                                    <input name="roof" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="lit" type="radio" class="form-check-input" id="validationCustom01"
                                            value="Asbestos" placeholder="Briks" required>
                                     <label class="form-check-label" for="inlineRadio1">LED</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="roof" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="lit" type="radio" class="form-check-input" id="validationCustom01"
                                            value="Plastic" placeholder="Briks" required>
                                     <label class="form-check-label" for="inlineRadio2">Plastic</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="roof" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="lit" type="radio" class="form-check-input" id="validationCustom01"
                                            value="Wood" placeholder="Briks" required>
                                     <label class="form-check-label" for="inlineRadio2">Wood</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="roof" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="lit" type="radio" class="form-check-input" id="validationCustom01"
                                            value="None" placeholder="Briks" required>
                                     <label class="form-check-label" for="inlineRadio2">None</label>
                                 </div>
