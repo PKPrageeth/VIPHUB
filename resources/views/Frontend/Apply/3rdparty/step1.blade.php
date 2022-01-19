@@ -161,14 +161,14 @@
                         <select name="title" class="form-select" id="validationCustom02" required>
 
 
-                                <option value="Motor Bike">Motor Bike</option>
-                                <option value="Three Wheeler">Three Wheeler</option>
-                                <option value="Tractors">Tractors</option>
-                                <option value="Motor Cars">Motor Cars</option>
-                                <option value="Lorry">Lorry</option>
-                                <option value="Dual Purpose vehicle private">Dual Purpose vehicle private</option>
-                                <option value="Dual Purpose vehicle hiring">Dual Purpose vehicle hiring</option>
-                                <option value="Trailers Hand Tractors">Trailers Hand Tractors</option>
+                            <option value="Motor Bike">Motor Bike</option>
+                            <option value="Three Wheeler">Three Wheeler</option>
+                            <option value="Tractors">Tractors</option>
+                            <option value="Motor Cars">Motor Cars</option>
+                            <option value="Lorry">Lorry</option>
+                            <option value="Dual Purpose vehicle private">Dual Purpose vehicle private</option>
+                            <option value="Dual Purpose vehicle hiring">Dual Purpose vehicle hiring</option>
+                            <option value="Trailers Hand Tractors">Trailers Hand Tractors</option>
 
                         </select>
 
@@ -181,12 +181,66 @@
 
 
                 </div>
+
                 <div class="row">
 
                     <div class="col-md-6 mb-3">
 
 
-                        <label for="validationCustom03">Present market value including accessories and spare parts</label>
+                        <label for="validationCustom03">Beneficiary Name</label>
+                        <input type="text" name="power" class="form-control" id="validationCustom03" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid Horse Power/ Cubic Capacity.
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationCustom03">Beneficiary NIC No</label>
+                        <input type="text" name="chasNo" class="form-control" id="validationCustom03" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid Chassis Number/ Frame Number.
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+ <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+
+                        <label for="validationCustom03">Beneficiary Name</label>
+                        <input type="text" name="power" class="form-control" id="validationCustom03" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid Horse Power/ Cubic Capacity.
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationCustom03">Beneficiary NIC No</label>
+                        <input type="text" name="chasNo" class="form-control" id="validationCustom03" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid Chassis Number/ Frame Number.
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+
+                        <label for="validationCustom03">Present market value including accessories and spare
+                            parts</label>
                         <input type="text" name="marketValue" class="form-control" id="validationCustom03" required>
                         <div class="invalid-feedback">
                             Please provide a valid Present market value.
@@ -211,11 +265,13 @@
                     <div class="col-md-6 mb-3">
 
                         <div class="row">
-                            <div class="col-md-4"><label for="validationCustom01">Is this vehicle at present maintained free of any damages?</label>
+                            <div class="col-md-4"><label for="validationCustom01">Is this vehicle at present maintained
+                                    free of any damages?</label>
                             </div>
                             <div class="col-md-8">
                                 <div class="form-check form-switch">
-                                    <input name="damages" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                    <input name="damages" class="form-check-input" type="checkbox"
+                                           id="flexSwitchCheckDefault">
 
                                 </div>
                             </div>
@@ -225,13 +281,63 @@
 
                     </div>
                     <div class="col-md-6">
-                        <label for="validationCustom03">Year of make</label>
-                        <input type="text" name="yom" class="form-control" id="validationCustom03" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid Chassis Number/ Frame Number.
+                        <div class="row">
+                            <div class="col-md-4">
+                                Vehicle usage
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Private
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Rent a car
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Transport passengers only
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Hiring
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Transport goods only
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Transport goods only
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Transport goods and passengers(both)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Any other purpose
+
+                                    </label>
+                                </div>
+
+                            </div>
                         </div>
-
-
                     </div>
 
 

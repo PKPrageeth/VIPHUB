@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-md-10 mb-3">
                         <label for="validationCustom01">Full Name</label>
-                        <input type="text" name="fname" class="form-control" id="validationCustom01" placeholder="Mark Anthony" required>
+                        <input type="text" name="fname" class="form-control" id="validationCustom01" placeholder="ex:Mark Anthony" required>
                         <div class="invalid-feedback">
                             Please provide a valid Name.
                         </div>
@@ -129,9 +129,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="validationCustom04">Permanent Address</label>
-                        <textarea name="address" class="form-control" id="validationCustom04" placeholder="Address"  required>
-
-                        </textarea>
+                        <textarea name="address" class="form-control" id="validationCustom04" placeholder="Address"  required></textarea>
 
                         <div class="invalid-feedback">
                             Please provide a valid Permanent Address.
