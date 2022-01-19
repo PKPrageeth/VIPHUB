@@ -54,12 +54,12 @@
     </div>
 </nav>
 <div class="container">
-        <div class="card mt-5">
-            <div class="card-body text-center">
-                <h1 class="text-success">Payment Success</h1>
-                <h3>{{$paymentStatus}}</h3>
-            </div>
+    <div class="card mt-5">
+        <div class="card-body text-center">
+            <h1 class="text-success">Payment Fail</h1>
+            <h3>{{$paymentStatus}}</h3>
         </div>
+    </div>
 
 
 </div>

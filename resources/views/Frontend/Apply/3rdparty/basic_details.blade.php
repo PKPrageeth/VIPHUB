@@ -65,24 +65,24 @@
                     <div class="col-md-2 mb-3">
                         <label for="validationCustom02">Title</label>
                         <select name="title" class="form-select" id="validationCustom02" required>
-                            <option value="0" selected disabled hidden>Please Select Title</option>
-                            <option value="1">Dr.</option>
-                            <option value="2">Hon.</option>
-                            <option value="3">Mr.</option>
-                            <option value="3">Mrs.</option>
-                            <option value="3">Ms.</option>
+                            <option   selected disabled hidden>Please Select Title</option>
+                            <option  >Dr.</option>
+                            <option >Hon.</option>
+                            <option >Mr.</option>
+                            <option  >Mrs.</option>
+                            <option  >Ms.</option>
                         </select>
 
-                        <div class="invalid-feedback">
-                            Please Select Title
-                        </div>
+                        @error('title')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="col-md-10 mb-3">
                         <label for="validationCustom01">Full Name</label>
-                        <input type="text" name="fname" class="form-control" id="validationCustom01" placeholder="Mark Anthony" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid Name.
-                        </div>
+                        <input type="text" name="Full_Name" class="form-control" id="validationCustom01" placeholder="Mark Anthony" required>
+                        @error('Full_Name')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
 
@@ -90,47 +90,47 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="validationCustom03">Permanent Address Line1</label>
-                        <input type="text" name="address1" class="form-control" id="validationCustom03"  required>
-                        <div class="invalid-feedback">
-                            Please provide a valid Permanent Address Line1.
-                        </div>
+                        <input type="text" name="Permanent_Address_Line1" class="form-control" id="validationCustom03"  required>
+                        @error('Permanent_Address_Line1')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="validationCustom04">Permanent Address Line2</label>
-                        <input type="text" name="address2" class="form-control" id="validationCustom04" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid Permanent Address Line2.
-                        </div>
+                        <input type="text" name="Permanent_Address_Line2" class="form-control" id="validationCustom04" required>
+                        @error('Permanent_Address_Line2')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="validationCustom05">Permanent Address Line3</label>
-                        <input type="text" name="address3" class="form-control" id="validationCustom05"   required>
-                        <div class="invalid-feedback">
-                            Please provide a valid Permanent Address Line3.
-                        </div>
+                        <input type="text" name="Permanent_Address_Line3" class="form-control" id="validationCustom05"   required>
+                        @error('Permanent_Address_Line3')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="validationCustom03">Email</label>
                         <input type="email" name="email" class="form-control" id="validationCustom03" placeholder="abc@abc.com" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid Email.
-                        </div>
+                        @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="validationCustom04">Contact Number</label>
-                        <input type="tel" name="mobile" class="form-control" id="validationCustom04" placeholder="0771234567" pattern="[0-9]{10}" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid Contact Number.
-                        </div>
+                        <input type="tel" name="Contact_Number" class="form-control" id="validationCustom04" placeholder="0771234567" pattern="[0-9]{10}" required>
+                        @error('Contact_Number')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="validationCustom05">NIC</label>
                         <input type="text" name="nic" class="form-control" id="validationCustom05" placeholder="913363471V" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid nic.
-                        </div>
+                        @error('nic')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">
@@ -138,9 +138,9 @@
                     <div class="col-md-6 mb-3">
                         <label for="validationCustom03">Date Of Birth</label>
                         <input type="Date" name="dob" class="form-control" id="validationCustom03"  required>
-                        <div class="invalid-feedback">
-                            Please provide a valid Date of birth.
-                        </div>
+                        @error('dob')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
 
@@ -155,36 +155,7 @@
 
             </form>
 
-            <script>
 
-                // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (function() {
-                    'use strict';
-                    window.addEventListener('load', function() {
-                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                        var forms = document.getElementsByClassName('needs-validation');
-                        const title = document.getElementById('validationCustom02');
-                        console.log(title.value)
-                        // Loop over them and prevent submission
-                        var validation = Array.prototype.filter.call(forms, function(form) {
-                            form.addEventListener('submit', function(event) {
-
-                                if (form.checkValidity() === false) {
-
-                                    if(title.value!=0){
-                                        alert('asdsd')
-                                        event.preventDefault();
-                                        event.stopPropagation();
-                                    }
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                }
-                                form.classList.add('was-validated');
-                            }, false);
-                        });
-                    }, false);
-                })();
-            </script>
         </div>
     </div>
 </div>

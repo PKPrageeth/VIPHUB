@@ -39,3 +39,10 @@ Route::post('/step3/data/gedara', [App\Http\Controllers\Frontend\Gedara\GedaraCo
 //3rdparty
 Route::post('/thirdparty/basic_details', [App\Http\Controllers\Frontend\Thirdparty\ThirdPartyController::class, 'basic_details']);
 Route::get('/thirdparty/step2', [App\Http\Controllers\Frontend\Thirdparty\ThirdPartyController::class, 'step1']);
+Route::post('/step3/data/thirdparty', [App\Http\Controllers\Frontend\Thirdparty\ThirdPartyController::class, 'Finlstep']);
+
+
+//response
+Route::get('/success', [App\Http\Controllers\Frontend\PageController::class, 'success']);
+Route::get('/fail', [App\Http\Controllers\Frontend\PageController::class, 'fail']);
+Route::get('/responseURL', [App\Http\Controllers\Frontend\PageController::class, 'responseURL'])->name('view-frontend-VIPHUB-payment-response');;

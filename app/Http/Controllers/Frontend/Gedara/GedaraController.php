@@ -89,9 +89,14 @@ class GedaraController extends Controller
         $name = time() . '_' . $file->getClientOriginalName();
         $path = base_path() . '/public/images/';
         $file->move(public_path('/images'), $name);
+        $file1 = $request->file('nicb');
+
+        $name1 = time() . '_' . $file1->getClientOriginalName();
+        $path1 = base_path() . '/public/images/';
+        $file1->move(public_path('/images'), $name);
 
         $front =  Psr7\Utils::tryFopen( $path.$name,'r');
-        $back  =  Psr7\Utils::tryFopen( $path.$name,'r');
+        $back  =  Psr7\Utils::tryFopen( $path1.$name1,'r');
 
         $client = new Client([
             'headers' => [ 'Content-Type' => 'multipart/form-data'],
@@ -221,6 +226,7 @@ class GedaraController extends Controller
         if (file_exists($path.$name)) {
 
             @unlink($path.$name);
+            @unlink($path1.$name1);
 
         }
         $content = $response->getBody();

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
-use Illuminate\Http\Request;
 use GuzzleHttp\Psr7;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
 class PageController extends Controller
@@ -112,8 +112,6 @@ class PageController extends Controller
     }
 
 
-
-
     public function step3(Request $request)
     {
         $file = $request->file('nicf');
@@ -122,14 +120,13 @@ class PageController extends Controller
         $path = base_path() . '/public/images/';
         $file->move(public_path('/images'), $name);
 
-        $front =  Psr7\Utils::tryFopen( $path.$name,'r');
-        $back  =  Psr7\Utils::tryFopen( $path.$name,'r');
+        $front = Psr7\Utils::tryFopen($path . $name, 'r');
+        $back = Psr7\Utils::tryFopen($path . $name, 'r');
 
         $client = new Client([
-            'headers' => [ 'Content-Type' => 'multipart/form-data'],
+            'headers' => ['Content-Type' => 'multipart/form-data'],
             'verify' => false
         ]);
-
 
 
 //dd($front);
@@ -137,9 +134,9 @@ class PageController extends Controller
 
         $client = new Client();
         $fileinfo = array(
-            'name'          =>  $name,
-            'clientNumber'  =>  "102425",
-            'type'          =>  'file',
+            'name' => $name,
+            'clientNumber' => "102425",
+            'type' => 'file',
         );
         $response = $client->post("https://marketplace-test.paymediasolutions.com/api/createGedaraPolicyToThirdPartyCompanyCustomer", [
             'multipart' => [
@@ -154,7 +151,7 @@ class PageController extends Controller
                 [
                     'name' => 'permenent_addr',
                     'contents' => "Kalutara",
-                ],[
+                ], [
                     'name' => 'date_of_birth',
                     'contents' => "1991/11/30",
                 ],
@@ -201,7 +198,7 @@ class PageController extends Controller
                 [
                     'name' => 'diabetes_hypertension',
                     'contents' => "N",
-                ],[
+                ], [
                     'name' => 'surgeries',
                     'contents' => "N",
                 ],
@@ -240,7 +237,7 @@ class PageController extends Controller
                 [
                     'name' => 'policyCertificate',
                     'contents' => 'Both',
-                ],  [
+                ], [
                     'name' => 'merchant_id',
                     'contents' => 'ceylinco123',
                 ], [
@@ -254,20 +251,20 @@ class PageController extends Controller
                     'contents' => 'Yes',
                 ],
                 [
-                    'name'     => 'nicFront',
-                    'contents' =>  $front ,
+                    'name' => 'nicFront',
+                    'contents' => $front,
                     'filename' => 'nicFront.jpg'
                 ],
                 [
-                    'name'     => 'nicBack',
+                    'name' => 'nicBack',
                     'contents' => $back,
                     'filename' => 'nicBack.jpg'
                 ]
             ]
         ]);
-        if (file_exists($path.$name)) {
+        if (file_exists($path . $name)) {
 
-            @unlink($path.$name);
+            @unlink($path . $name);
 
         }
         $content = $response->getBody();
@@ -279,5 +276,30 @@ class PageController extends Controller
         return view('Frontend.Apply.Property.step3');
     }
 
+    function success()
+    {
+        return view('Frontend.Apply.ResponseNotifications.success');
+
+    }
+    function fail()
+    {
+        return view('Frontend.Apply.ResponseNotifications.fail');
+
+    }
+    function responseURL(Request $request){
+
+        $paymentStatus = $request->query("status");
+
+        if($paymentStatus =='FAILED'){
+            return view('Frontend.Apply.ResponseNotifications.fail')->with([
+                'paymentStatus' => $paymentStatus,
+            ]);
+        }
+        else {
+            return view('Frontend.Apply.ResponseNotifications.success')->with([
+                'paymentStatus' => $paymentStatus,
+            ]);
+        }
+    }
 
 }

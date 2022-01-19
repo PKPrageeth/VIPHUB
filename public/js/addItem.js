@@ -130,7 +130,9 @@ function readURL(input) {
     } else {
         removeUpload();
     }
-}function readURLNICb(input) {
+}
+
+function readURLNICb(input) {
     if (input.files && input.files[0]) {
 
         var reader = new FileReader();
@@ -151,15 +153,60 @@ function readURL(input) {
     }
 }
 
+function readURLVehi(input) {
+    if (input.files && input.files[0]) {
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('.image-upload-wrap2').hide();
+
+            $('.file-upload-image2').attr('src', e.target.result);
+            $('.file-upload-content2').show();
+
+            $('.image-title2').html(input.files[0].name);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+
+    } else {
+        removeUpload();
+    }
+}
+
 function removeUpload() {
     $('.file-upload-input').replaceWith($('.file-upload-input').clone());
     $('.file-upload-content').hide();
     $('.image-upload-wrap').show();
 }
 
+function removeUpload1() {
+    $('.file-upload-input1').replaceWith($('.file-upload-input1').clone());
+    $('.file-upload-content1').hide();
+    $('.image-upload-wrap1').show();
+}
+
+function removeUpload2() {
+    $('.file-upload-input2').replaceWith($('.file-upload-input2').clone());
+    $('.file-upload-content2').hide();
+    $('.image-upload-wrap2').show();
+}
+
 $('.image-upload-wrap').bind('dragover', function () {
     $('.image-upload-wrap').addClass('image-dropping');
 });
+$('.image-upload-wrap1').bind('dragover', function () {
+    $('.image-upload-wrap1').addClass('image-dropping');
+});
+$('.image-upload-wrap2').bind('dragover', function () {
+    $('.image-upload-wrap2').addClass('image-dropping');
+});
 $('.image-upload-wrap').bind('dragleave', function () {
     $('.image-upload-wrap').removeClass('image-dropping');
+});
+$('.image-upload-wrap1').bind('dragleave', function () {
+    $('.image-upload-wrap1').removeClass('image-dropping');
+});
+$('.image-upload-wrap2').bind('dragleave', function () {
+    $('.image-upload-wrap2').removeClass('image-dropping');
 });
