@@ -176,19 +176,25 @@ function readURLVehi(input) {
 
 function removeUpload() {
     $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+    $('.file-upload-input').val("");
     $('.file-upload-content').hide();
+    $('.file-upload-image').attr('src',"");
     $('.image-upload-wrap').show();
 }
 
 function removeUpload1() {
     $('.file-upload-input1').replaceWith($('.file-upload-input1').clone());
+    $('.file-upload-input1').val("");
     $('.file-upload-content1').hide();
+    $('.file-upload-image1').attr('src', "");
     $('.image-upload-wrap1').show();
 }
 
 function removeUpload2() {
     $('.file-upload-input2').replaceWith($('.file-upload-input2').clone());
+    $('.file-upload-input2').val("");
     $('.file-upload-content2').hide();
+    $('.file-upload-image2').attr('src', "");
     $('.image-upload-wrap2').show();
 }
 

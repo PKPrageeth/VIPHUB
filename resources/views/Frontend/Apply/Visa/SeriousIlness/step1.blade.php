@@ -59,7 +59,7 @@
             <h3>Personal Health Declaration (Person Who obtain the cover)</h3>
         </div>
         <div class="card-body">
-            <form class="needs-validation" action="{{url("/step3/data/serious_illness")}}" method="post" novalidate
+            <form class="needs-validation" action="{{url("/step3/data/visa")}}" method="post" novalidate
                   enctype='multipart/form-data'>
                 @csrf
                 <div class="row">

@@ -61,7 +61,7 @@
         <div class="card-body">
             @if(\Session::has('error'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Already  exist</strong>
+                    <strong>NIC already exsist</strong>
 
                 </div>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -109,7 +109,7 @@
                         <label for="validationCustom01">Full Name</label>
                         <input type="text" name="Full_Name" value="{{old('Full_Name')}}" class="form-control"
                                id="validationCustom01"
-                               placeholder="Mark Anthony" required>
+                               placeholder="Full Name" required>
                         @error('Full_Name')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -123,7 +123,7 @@
                         <label for="validationCustom03">Email</label>
                         <input type="email" name="email" value="{{old('email')}}" class="form-control"
                                id="validationCustom03"
-                               placeholder="abc@abc.com" required>
+                               placeholder="Email" required>
                         @error('email')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -132,7 +132,7 @@
                         <label for="validationCustom04">Contact Number</label>
                         <input type="tel" name="Contact_Number" value="{{old('Contact_Number')}}" class="form-control"
                                id="validationCustom04"
-                               placeholder="0771234567" pattern="[0-9]{10}" required>
+                               placeholder="Contact Numbe" pattern="[0-9]{10}" required>
                         @error('Contact_Number')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -140,7 +140,7 @@
                     <div class="col-md-3 mb-3">
                         <label id="niclable" for="nic">NIC</label>
                         <input type="text" name="nic" class="form-control" value="{{old('nic')}}" id="nic"
-                               placeholder="913363471V" required>
+                               placeholder="NIC" required>
                         @error('nic')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -151,7 +151,7 @@
                         <label id="Guardian" for="nic">Name of the Guardian</label>
                         <input type="text" name="Guardian" class="form-control" value="{{old('Guardian')}}"
                                id="Guardian"
-                               placeholder="" required>
+                               placeholder="Name of the Guardian" required>
 
                     </div>
                     <div class="col-md-6 mb-3">
@@ -178,7 +178,7 @@
                     <div class="col-md-6 mb-3">
                         <label for="validationCustom03">Permanent Address</label>
                         <textarea name="Permanent_Address" class="form-control" id="validationCustom04"
-                                  placeholder="Address" required>{{old('Permanent_Address')}}</textarea>
+                                  placeholder="Permanent Address" required>{{old('Permanent_Address')}}</textarea>
                         @error('Permanent_Address')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -227,7 +227,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body ">
                                 <table class="table table-borderless table-dark">
                                     <tr>
                                         <td>Hospitalization Benefit within Sri Lanka - Annual/Event Limit</td>

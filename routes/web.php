@@ -19,7 +19,7 @@ Route::get('/hhhh', function () {
 
 Route::get('/', [App\Http\Controllers\Frontend\PageController::class, 'indexPage']);
 Route::get('index/{var}', [App\Http\Controllers\Frontend\PageController::class, 'categoryLoad']);
-Route::get('/basic_details/{var}/{var1}', [App\Http\Controllers\Frontend\PageController::class, 'basic_details']);
+Route::get('/basic_details/{var}/{var1}/{var3}', [App\Http\Controllers\Frontend\PageController::class, 'basic_details']);
 
 
 
@@ -47,10 +47,17 @@ Route::post('/serious-illness/basic_details', [App\Http\Controllers\Frontend\Ser
 Route::get('/serious-illness/step2', [App\Http\Controllers\Frontend\SeriousIlness\SeriousIlnessController::class, 'step1']);
 Route::post('/step3/data/serious_illness', [App\Http\Controllers\Frontend\SeriousIlness\SeriousIlnessController::class, 'Finlstep']);
 
-//Seriouse Ilness
+//hospital cover
 Route::post('/hospitalization/basic_details', [App\Http\Controllers\Frontend\Hospitalization\HospitalizationController::class, 'basic_details']);
 Route::get('/hospitalization/step2', [App\Http\Controllers\Frontend\Hospitalization\HospitalizationController::class, 'step1']);
 Route::post('/step3/data/hospitalization', [App\Http\Controllers\Frontend\Hospitalization\HospitalizationController::class, 'Finlstep']);
+
+//visa cover
+Route::post('/visa/basic_details', [App\Http\Controllers\Frontend\VisaCard\VisaCarSeriousIlnessController::class, 'basic_details']);
+Route::get('/visa/step2', [App\Http\Controllers\Frontend\VisaCard\VisaCarSeriousIlnessController::class, 'step1']);
+Route::post('/step3/data/visa', [App\Http\Controllers\Frontend\VisaCard\VisaCarSeriousIlnessController::class, 'Finlstep']);
+
+
 
 
 //response

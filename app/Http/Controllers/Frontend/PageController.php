@@ -93,19 +93,20 @@ class PageController extends Controller
         return view('Frontend.index')->with('category', $menu)->with('all', $all)->with('active', $Cat);
     }
 
-    public function basic_details($product,$plan)
+    public function basic_details($product,$plan,$premium)
     {
 
         if ($product == "ceylinco-gedara") {
-            return view('Frontend.Apply.Property.basic_details');
+            return view('Frontend.Apply.Property.basic_details')->with('premium',$premium);
 
         } else if ($product == "ceylinco-third-party") {
-            return view('Frontend.Apply.3rdparty.basic_details');
+            return view('Frontend.Apply.3rdparty.basic_details')->with('premium',$premium)->with('plan',$plan);
         } else if ($product == "ceylinco-serious-illness") {
             return view('Frontend.Apply.SeriousIlness.basic_details')->with('plan',$plan);
         } else if ($product == "ceylinco-hospitalization-cover") {
             return view('Frontend.Apply.Hospitalization.basic_details')->with('plan',$plan);
         } else if ($product == "ceylinco-serious-illness-visa-card-holders") {
+            return view('Frontend.Apply.Visa.SeriousIlness.basic_details')->with('plan',$plan)->with('premium',$premium);
         }
 
 

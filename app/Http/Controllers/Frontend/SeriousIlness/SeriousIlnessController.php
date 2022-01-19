@@ -17,18 +17,28 @@ class SeriousIlnessController extends Controller
             'apply' => 'required',
             'Full_Name' => 'required',
             'email' => 'required',
-            'Contact_Number' => 'required|max:10|min:10',
-            'nic' => ['required',
+            'Contact_Number' => [
                 function ($attribute, $value, $fail) {
-                    if( is_int( $value ) && strlen($value)==12 && preg_match('/^([0-9]{12})$/',$value)) {
-                        return true;
-                    } else if(strlen($value)==10 && preg_match('/^([0-9]{9}[vVxX]{1})$/',$value)){
+                    if (preg_match('/^[0-9]{10}$/', $value)) {
                         return true;
                     }else{
-                        $fail($attribute.' is invalid.');
+                        $fail($attribute . ' is invalid.');
+                    }
+                },'required', 'max:10', 'min:10',
+
+
+            ],
+            'nic' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (is_int($value) && strlen($value) == 12 && preg_match('/^([0-9]{12})$/', $value)) {
+                        return true;
+                    } else if (strlen($value) == 10 && preg_match('/^([0-9]{9}[vVxX]{1})$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
                     }
                 },
-                ],
+            ],
             'Permanent_Address' => 'required',
             'dob' => 'required',
             'plan' => 'required',
@@ -46,8 +56,8 @@ class SeriousIlnessController extends Controller
         ]);
         $responseCat = $resp->getBody();
         $responseCatArray = json_decode($responseCat, true);
-        if($responseCatArray['data']['policyExists']){
-            return back()->with('error','this policy already taken by you');
+        if ($responseCatArray['data']['policyExists']) {
+            return back()->with('error', 'this policy already taken by you');
         }
 
         $data = [];
@@ -67,6 +77,7 @@ class SeriousIlnessController extends Controller
         session(['serious-illness' => $data]);
         return redirect('/serious-illness/step2');
     }
+
     public function step1(Request $request)
     {
         if (session('serious-illness')) {
@@ -78,12 +89,15 @@ class SeriousIlnessController extends Controller
 
     }
 
-    function Finlstep(Request $request){
+    function Finlstep(Request $request)
+    {
         $request->validate([
 
             'nicf' => 'required',
             'nicb' => 'required',
             'policy' => 'required',
+            'nature_of_illness' => ['required_with:seriousillness'],
+            'typeofsurgerie' => ['required_with:majorsurgeries'],
         ]);
 
         $data = session('serious-illness');
@@ -100,14 +114,13 @@ class SeriousIlnessController extends Controller
         $path1 = base_path() . '/public/images/';
         $file1->move(public_path('/images'), $name1);
 
-        $front =  Psr7\Utils::tryFopen( $path.$name,'r');
-        $back  =  Psr7\Utils::tryFopen( $path1.$name1,'r');
+        $front = Psr7\Utils::tryFopen($path . $name, 'r');
+        $back = Psr7\Utils::tryFopen($path1 . $name1, 'r');
 
         $client = new Client([
-            'headers' => [ 'Content-Type' => 'multipart/form-data'],
+            'headers' => ['Content-Type' => 'multipart/form-data'],
             'verify' => false
         ]);
-
 
 
 //dd($front);
@@ -115,9 +128,9 @@ class SeriousIlnessController extends Controller
 
         $client = new Client();
         $fileinfo = array(
-            'name'          =>  $name,
-            'clientNumber'  =>  "102425",
-            'type'          =>  'file',
+            'name' => $name,
+            'clientNumber' => "102425",
+            'type' => 'file',
         );
         $response = $client->post("https://marketplace-test.paymediasolutions.com/api/createSeriousIllnessPolicyToThirdPartyCompanyCustomer", [
             'multipart' => [
@@ -127,12 +140,12 @@ class SeriousIlnessController extends Controller
                 ],
                 [
                     'name' => 'full_name',
-                    'contents' =>  $data['Full_Name'],
+                    'contents' => $data['Full_Name'],
                 ],
                 [
                     'name' => 'permenent_addr',
-                    'contents' =>  $data['Permanent_Address'],
-                ],[
+                    'contents' => $data['Permanent_Address'],
+                ], [
                     'name' => 'date_of_birth',
                     'contents' => $data['dob'],
                 ],
@@ -166,18 +179,18 @@ class SeriousIlnessController extends Controller
                 ],
                 [
                     'name' => 'seriousIllness',
-                    'contents' => ($request->seriousillness==1)?'Y':'N',
+                    'contents' => ($request->seriousillness == 1) ? 'Y' : 'N',
                 ],
                 [
                     'name' => 'diabetes_hypertension',
-                    'contents' => ($request->seriousillness==1)?'Y':'N',
-                ],[
+                    'contents' => ($request->seriousillness == 1) ? 'Y' : 'N',
+                ], [
                     'name' => 'surgeries',
-                    'contents' => ($request->diabetes_hypertension==1)?'Y':'N',
+                    'contents' => ($request->diabetes_hypertension == 1) ? 'Y' : 'N',
                 ],
                 [
                     'name' => 'majorsurgeries',
-                    'contents' => ($request->majorsurgeries==1)?'Y':'N',
+                    'contents' => ($request->majorsurgeries == 1) ? 'Y' : 'N',
                 ],
                 [
                     'name' => 'nature_of_illness',
@@ -195,7 +208,7 @@ class SeriousIlnessController extends Controller
                 [
                     'name' => 'policyCertificate',
                     'contents' => $request->policy,
-                ],  [
+                ], [
                     'name' => 'merchant_id',
                     'contents' => 'ceylinco123',
                 ], [
@@ -209,12 +222,12 @@ class SeriousIlnessController extends Controller
                     'contents' => 'Yes',
                 ],
                 [
-                    'name'     => 'nicFront',
-                    'contents' =>  $front ,
+                    'name' => 'nicFront',
+                    'contents' => $front,
                     'filename' => 'nicFront.jpg'
                 ],
                 [
-                    'name'     => 'nicBack',
+                    'name' => 'nicBack',
                     'contents' => $back,
                     'filename' => 'nicBack.jpg'
                 ],
@@ -224,19 +237,16 @@ class SeriousIlnessController extends Controller
                 ]
             ]
         ]);
-        if (file_exists($path.$name)) {
+        if (file_exists($path . $name)) {
 
-            @unlink($path.$name);
-            @unlink($path1.$name1);
+            @unlink($path . $name);
+            @unlink($path1 . $name1);
 
         }
         $content = $response->getBody();
         $array = json_decode($content, true);
 
         return Redirect::to($array['paymentLink']);
-
-
-
 
 
     }

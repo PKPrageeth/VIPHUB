@@ -16,6 +16,7 @@ class GedaraController extends Controller
         $data = [];
         $data['title'] = $request->title;
         $data['fname'] = $request->fname;
+        $data['premium'] = $request->premium;
         $data['email'] = $request->email;
         $data['mobile'] = $request->mobile;
         $data['nic'] = $request->nic;
@@ -93,7 +94,7 @@ class GedaraController extends Controller
 
         $name1 = time() . '_' . $file1->getClientOriginalName();
         $path1 = base_path() . '/public/images/';
-        $file1->move(public_path('/images'), $name);
+        $file1->move(public_path('/images'), $name1);
 
         $front =  Psr7\Utils::tryFopen( $path.$name,'r');
         $back  =  Psr7\Utils::tryFopen( $path1.$name1,'r');
@@ -193,7 +194,7 @@ class GedaraController extends Controller
 
                 [
                     'name' => 'premium',
-                    'contents' => '5000',
+                    'contents' => $data['premium'],
                 ],
                 [
                     'name' => 'policyCertificate',

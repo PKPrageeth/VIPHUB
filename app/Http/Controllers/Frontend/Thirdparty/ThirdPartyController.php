@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Frontend\Thirdparty;
 
 use App\Http\Controllers\Controller;
+use Guzzle\Http\Exception\ClientErrorResponseException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Guzzle\Http\Exception\ClientErrorResponseException;
+
 class ThirdPartyController extends Controller
 {
     function basic_details(Request $request)
@@ -15,15 +16,41 @@ class ThirdPartyController extends Controller
         $request->validate([
             'title' => 'required',
             'Full_Name' => 'required',
-            'email' => 'required',
-            'Contact_Number' => 'required',
-            'nic' => 'required',
+            'email' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },],
+            'Contact_Number' => [
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^[0-9]{10}$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                }, 'required', 'max:10', 'min:10',
+
+
+            ],
+            'nic' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (is_int($value) && strlen($value) == 12 && preg_match('/^([0-9]{12})$/', $value)) {
+                        return true;
+                    } else if (strlen($value) == 10 && preg_match('/^([0-9]{9}[vVxX]{1})$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },
+            ],
             'Permanent_Address_Line1' => 'required',
             'Permanent_Address_Line2' => 'required',
             'Permanent_Address_Line3' => 'required',
             'dob' => 'required',
         ]);
-
 
 
         $data = [];
@@ -32,6 +59,7 @@ class ThirdPartyController extends Controller
         $data['email'] = $request->email;
         $data['Contact_Number'] = $request->Contact_Number;
         $data['nic'] = $request->nic;
+        $data['premium'] = $request->premium;
         $data['Permanent_Address_Line1'] = $request->Permanent_Address_Line1;
         $data['Permanent_Address_Line2'] = $request->Permanent_Address_Line2;
         $data['Permanent_Address_Line3'] = $request->Permanent_Address_Line3;
@@ -62,15 +90,47 @@ class ThirdPartyController extends Controller
             'Horse_Power' => 'required',
             'color' => 'required',
             'Carrying_Capacity' => 'required',
-            'seating_capacity' => 'required',
+            'seating_capacity' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^[a-zA-Z0-9][a-zA-Z0-9 ]+$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },],
             'fuel' => 'required',
             'Vehicle_Type' => 'required',
-            'market_Value' => 'required',
-            'yom' => 'required',
+            'market_Value' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^[0-9]{4}$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },],
+            'yom' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^[0-9]{4}$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },
+            ],
 
             'usage' => 'required',
             'Beneficiary_Name' => 'required',
-            'Beneficiary_NIC' => 'required',
+            'Beneficiary_NIC' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (is_int($value) && strlen($value) == 12 && preg_match('/^([0-9]{12})$/', $value)) {
+                        return true;
+                    } else if (strlen($value) == 10 && preg_match('/^([0-9]{9}[vVxX]{1})$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },
+                ],
             'Beneficiary_Relationship' => 'required',
             'language' => 'required',
 
@@ -171,7 +231,7 @@ class ThirdPartyController extends Controller
                     [
                         'name' => 'color',
                         'contents' => $request['color'],
-                    ],                [
+                    ], [
                         'name' => 'model',
                         'contents' => $request['model'],
                     ],
@@ -197,7 +257,7 @@ class ThirdPartyController extends Controller
                     ],
                     [
                         'name' => 'damages',
-                        'contents' => $request['damages']?'Y':'N',
+                        'contents' => $request['damages'] ? 'Y' : 'N',
                     ],
                     [
                         'name' => 'usage',
@@ -233,11 +293,11 @@ class ThirdPartyController extends Controller
                     ],
                     [
                         'name' => 'declaration',
-                        'contents' => $request['declaration']?'Y':'N',
+                        'contents' => $request['declaration'] ? 'Y' : 'N',
                     ],
                     [
                         'name' => 'premium',
-                        'contents' => '5000',
+                        'contents' => $data['premium'],
                     ],
                     [
                         'name' => 'vehicle_reg_certificate',
@@ -289,7 +349,7 @@ class ThirdPartyController extends Controller
 
             $content = $response->getBody();
             $array = json_decode($content, true);
-        }catch (\Exception  $e){
+        } catch (\Exception  $e) {
 
             dd($e);
         }

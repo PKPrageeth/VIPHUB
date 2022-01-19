@@ -72,8 +72,9 @@
                    });
                </script>
             @endif
-            <form method="post" class="needs-validation" action="{{url("/hospitalization/basic_details")}}" novalidate>
+            <form method="post" class="needs-validation" action="{{url("/visa/basic_details")}}" novalidate>
                 @csrf
+                <input type="hidden" value="{{$premium}}" name="premium">
                 <div class="row">
                     <div class="col-md-4">
                         <label for="apply">You apply this policy for</label>
@@ -132,7 +133,7 @@
                         <label for="validationCustom04">Contact Number</label>
                         <input type="tel" name="Contact_Number" value="{{old('Contact_Number')}}" class="form-control"
                                id="validationCustom04"
-                               placeholder="Contact Number" pattern="[0-9]{10}" required>
+                               placeholder="Contact Numbe" pattern="[0-9]{10}" required>
                         @error('Contact_Number')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -192,7 +193,7 @@
                                 <label for="validationCustom03">Preferred Plan</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="hidden" id="premium" name="premium" value="600"/>
+
                                 <div class="form-check form-check-inline">
                                     <input {{($plan=='Plan 1')?"checked ":"disabled"}} checked class="form-check-input"
                                            type="radio" name="plan" id="inlineRadio1" value="Plan 1">
@@ -208,7 +209,16 @@
                                            type="radio" name="plan" id="inlineRadio3" value="Plan 3">
                                     <label class="form-check-label" for="inlineRadio3">Plan 3</label>
                                 </div>
-
+                                <div class="form-check form-check-inline">
+                                    <input {{($plan=='Plan 4')?"checked ":"disabled"}} class="form-check-input"
+                                           type="radio" name="plan" id="inlineRadio4" value="Plan 4">
+                                    <label class="form-check-label" for="inlineRadio4">Plan 4</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input {{($plan=='Plan 5')?"checked ":"disabled"}} class="form-check-input"
+                                           type="radio" name="plan" id="inlineRadio5" value="Plan 5">
+                                    <label class="form-check-label" for="inlineRadio5">Plan 5</label>
+                                </div>
 
                             </div>
                         </div>
@@ -217,33 +227,35 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <table class="table table-borderless table-dark">
-                                    <tr>
-                                        <td>Daily Allowance for Medical Benefit</td>
-                                        <td class="op1">Rs.1,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Serious Illness Benefit</td>
-                                        <td class="op2">Not applicable</td>
-                                    </tr>
-                                    <tr>
-                                        <td>The cover provide a daily allowance as tabulated above for the period of Hospitalization maximum up to 7 days per event 21 days per annum</td>
-                                        <td class="op3"></td>
-                                    </tr> <tr>
-                                        <td>And reimbursement of Hospitalization benefit in respect of Serious Illness mentioned below up to a maximum of 100,000/- per annum</td>
-                                        <td class="op3"></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td><h6>PREMIUM WITH TAXES</h6></td>
-                                        <td class="op5"><h6>Rs.850
-                                            </h6></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
+{{--                        <div class="card">--}}
+{{--                            <div class="card-body">--}}
+{{--                                <table class="table table-borderless table-dark">--}}
+{{--                                    <tr>--}}
+{{--                                        <td>Hospitalization Benefit within Sri Lanka - Annual/Event Limit</td>--}}
+{{--                                        <td class="op1">Rs.100,000</td>--}}
+{{--                                    </tr>--}}
+{{--                                    <tr>--}}
+{{--                                        <td>Total Hospital room charges including admission fees per event</td>--}}
+{{--                                        <td class="op2">Rs.30,000</td>--}}
+{{--                                    </tr>--}}
+{{--                                    <tr>--}}
+{{--                                        <td>Specialized services per event</td>--}}
+{{--                                        <td class="op3">Rs.20,000</td>--}}
+{{--                                    </tr>--}}
+{{--                                    <tr>--}}
+{{--                                        <td>All other expenses including, Surgeon's & Doctor' charges, Operational--}}
+{{--                                            expenses, Medical Expenses and Emergency,Transport per Event--}}
+{{--                                        </td>--}}
+{{--                                        <td class="op4">Rs.50,000</td>--}}
+{{--                                    </tr>--}}
+{{--                                    <tr>--}}
+{{--                                        <td><h6>PREMIUM WITH TAXES</h6></td>--}}
+{{--                                        <td class="op5"><h6>Rs.600--}}
+{{--                                            </h6></td>--}}
+{{--                                    </tr>--}}
+{{--                                </table>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
 
@@ -293,48 +305,86 @@
             $('.Child').show();
         }
         if (plan === 'Plan 1') {
-            $('.op1').text("Rs.1,000");
-            $('.op2').text("Not applicable");
-            $('.op5').text("Rs.125.00");
-            $('#premium').val("125");
+            $('.op1').text("Rs.100,000");
+            $('.op2').text("Rs.30,000");
+            $('.op3').text("Rs.20,000");
+            $('.op4').text("Rs.50,000");
+            $('.op5').text("Rs.600");
+            $('#premium').val("600");
         }
         if (plan === 'Plan 2') {
-            $('.op1').text("Rs.4,000");
-            $('.op2').text("Rs.100,000");
-
-            $('.op5').text("Rs.600.00");
-            $('#premium').val("600");
+            $('.op1').text("Rs.200,000");
+            $('.op2').text("Rs.60,000");
+            $('.op3').text("Rs.40,000");
+            $('.op4').text("Rs.100,000");
+            $('.op5').text("Rs.1,050");
+            $('#premium').val("1050");
         }
         if (plan === 'Plan 3') {
-            $('.op1').text("Rs.6,000");
-            $('.op2').text("Rs.100,000");
-
-            $('.op5').text("Rs.850.00");
-            $('#premium').val("850");
+            $('.op1').text("Rs.300,000");
+            $('.op2').text("Rs.90,000");
+            $('.op3').text("Rs.60,000");
+            $('.op4').text("Rs.150,000");
+            $('.op5').text("Rs.1,450");
+            $('#premium').val("1450");
+        }
+        if (plan === 'Plan 4') {
+            $('.op1').text("Rs.400,000");
+            $('.op2').text("Rs.120,000");
+            $('.op3').text("Rs.80,000");
+            $('.op4').text("Rs.200,000");
+            $('.op5').text("Rs.2,000");
+            $('#premium').val("2000");
+        }
+        if (plan === 'Plan 5') {
+            $('.op1').text("Rs.500,000");
+            $('.op2').text("Rs.150,000");
+            $('.op3').text("Rs.100,000");
+            $('.op4').text("Rs.250,000");
+            $('.op5').text("Rs.2,350");
+            $('#premium').val("2350");
         }
 
-
         $('#inlineRadio1').on('click', function () {
-            $('.op1').text("Rs.1,000");
-            $('.op2').text("Not applicable");
-            $('.op5').text("Rs.125.00");
-            $('#premium').val("125");
-        });
-        $('#inlineRadio2').on('click', function () {
-            $('.op1').text("Rs.4,000");
-            $('.op2').text("Rs.100,000");
-
-            $('.op5').text("Rs.600.00");
+            $('.op1').text("Rs.100,000");
+            $('.op2').text("Rs.30,000");
+            $('.op3').text("Rs.20,000");
+            $('.op4').text("Rs.50,000");
+            $('.op5').text("Rs.600");
             $('#premium').val("600");
         });
-        $('#inlineRadio3').on('click', function () {
-            $('.op1').text("Rs.6,000");
-            $('.op2').text("Rs.100,000");
-
-            $('.op5').text("Rs.850.00");
-            $('#premium').val("850");
+        $('#inlineRadio2').on('click', function () {
+            $('.op1').text("Rs.200,000");
+            $('.op2').text("Rs.60,000");
+            $('.op3').text("Rs.40,000");
+            $('.op4').text("Rs.100,000");
+            $('.op5').text("Rs.1,050");
+            $('#premium').val("1050");
         });
-
+        $('#inlineRadio3').on('click', function () {
+            $('.op1').text("Rs.300,000");
+            $('.op2').text("Rs.90,000");
+            $('.op3').text("Rs.60,000");
+            $('.op4').text("Rs.150,000");
+            $('.op5').text("Rs.1,450");
+            $('#premium').val("1450");
+        });
+        $('#inlineRadio4').on('click', function () {
+            $('.op1').text("Rs.400,000");
+            $('.op2').text("Rs.120,000");
+            $('.op3').text("Rs.80,000");
+            $('.op4').text("Rs.200,000");
+            $('.op5').text("Rs.2,000");
+            $('#premium').val("2000");
+        });
+        $('#inlineRadio5').on('click', function () {
+            $('.op1').text("Rs.500,000");
+            $('.op2').text("Rs.150,000");
+            $('.op3').text("Rs.100,000");
+            $('.op4').text("Rs.250,000");
+            $('.op5').text("Rs.2,350");
+            $('#premium').val("2350");
+        });
         $('#apply').on('change', function () {
             if (this.value == 'Child') {
 

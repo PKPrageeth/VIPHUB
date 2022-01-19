@@ -61,6 +61,7 @@
         <div class="card-body">
             <form method="post" class="needs-validation" action="{{url("/Gedara/basic_details")}}" novalidate>
                 @csrf
+                <input type="hidden" value="{{$premium}}" name="premium">
                 <div class="row">
                     <div class="col-md-2 mb-3">
                         <label for="validationCustom02">Title</label>

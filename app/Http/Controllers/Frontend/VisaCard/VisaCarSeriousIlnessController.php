@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\Hospitalization;
+namespace App\Http\Controllers\Frontend\VisaCard;
 
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class HospitalizationController extends Controller
+class VisaCarSeriousIlnessController extends Controller
 {
+
     function basic_details(Request $request)
     {
         $request->validate([
@@ -22,21 +22,21 @@ class HospitalizationController extends Controller
                 function ($attribute, $value, $fail) {
                     if (preg_match('/^[0-9]{10}$/', $value)) {
                         return true;
-                    }else{
+                    } else {
                         $fail($attribute . ' is invalid.');
                     }
-                },'required', 'max:10', 'min:10',
+                }, 'required', 'max:10', 'min:10',
 
 
             ],
             'nic' => ['required',
                 function ($attribute, $value, $fail) {
-                    if( is_int( $value ) && strlen($value)==12 && preg_match('/^([0-9]{12})$/',$value)) {
+                    if (is_int($value) && strlen($value) == 12 && preg_match('/^([0-9]{12})$/', $value)) {
                         return true;
-                    } else if(strlen($value)==10 && preg_match('/^([0-9]{9}[vVxX]{1})$/',$value)){
+                    } else if (strlen($value) == 10 && preg_match('/^([0-9]{9}[vVxX]{1})$/', $value)) {
                         return true;
-                    }else{
-                        $fail($attribute.' is invalid.');
+                    } else {
+                        $fail($attribute . ' is invalid.');
                     }
                 },
             ],
@@ -57,8 +57,8 @@ class HospitalizationController extends Controller
         ]);
         $responseCat = $resp->getBody();
         $responseCatArray = json_decode($responseCat, true);
-        if($responseCatArray['data']['policyExists']){
-            return back()->with('error','this policy already taken by you');
+        if ($responseCatArray['data']['policyExists']) {
+            return back()->with('error', 'this policy already taken by you');
         }
 
         $data = [];
@@ -75,20 +75,23 @@ class HospitalizationController extends Controller
         $data['Permanent_Address'] = $request->Permanent_Address;
         $data['dob'] = $request->dob;
 
-        session(['hospitl' => $data]);
-        return redirect('/hospitalization/step2');
+        session(['visaS' => $data]);
+        return redirect('/visa/step2');
     }
+
     public function step1(Request $request)
     {
-        if (session('hospitl')) {
-            return view('Frontend.Apply.Hospitalization.step1');
+        if (session('visaS')) {
+            return view('Frontend.Apply.Visa.SeriousIlness.step1');
         } else {
             return redirect('/basic_details/Hospitalization');
         }
 
 
     }
-    function Finlstep(Request $request){
+
+    function Finlstep(Request $request)
+    {
         $request->validate([
 
             'nicf' => 'required',
@@ -110,14 +113,13 @@ class HospitalizationController extends Controller
         $path1 = base_path() . '/public/images/';
         $file1->move(public_path('/images'), $name1);
 
-        $front =  Psr7\Utils::tryFopen( $path.$name,'r');
-        $back  =  Psr7\Utils::tryFopen( $path1.$name1,'r');
+        $front = Psr7\Utils::tryFopen($path . $name, 'r');
+        $back = Psr7\Utils::tryFopen($path1 . $name1, 'r');
 
         $client = new Client([
-            'headers' => [ 'Content-Type' => 'multipart/form-data'],
+            'headers' => ['Content-Type' => 'multipart/form-data'],
             'verify' => false
         ]);
-
 
 
 //dd($front);
@@ -125,11 +127,11 @@ class HospitalizationController extends Controller
 
         $client = new Client();
         $fileinfo = array(
-            'name'          =>  $name,
-            'clientNumber'  =>  "102425",
-            'type'          =>  'file',
+            'name' => $name,
+            'clientNumber' => "102425",
+            'type' => 'file',
         );
-        $response = $client->post("https://marketplace-test.paymediasolutions.com/api/createNationalHealthPolicyToThirdPartyCompanyCustomer", [
+        $response = $client->post("https://marketplace-test.paymediasolutions.com/api/createSeriousIllnessPolicyVisaCardHoldersToThirdPartyCompanyCustomer", [
             'multipart' => [
                 [
                     'name' => 'title',
@@ -137,12 +139,12 @@ class HospitalizationController extends Controller
                 ],
                 [
                     'name' => 'full_name',
-                    'contents' =>  $data['Full_Name'],
+                    'contents' => $data['Full_Name'],
                 ],
                 [
                     'name' => 'permenent_addr',
-                    'contents' =>  $data['Permanent_Address'],
-                ],[
+                    'contents' => $data['Permanent_Address'],
+                ], [
                     'name' => 'date_of_birth',
                     'contents' => $data['dob'],
                 ],
@@ -176,18 +178,18 @@ class HospitalizationController extends Controller
                 ],
                 [
                     'name' => 'seriousIllness',
-                    'contents' => ($request->seriousillness==1)?'Y':'N',
+                    'contents' => ($request->seriousillness == 1) ? 'Y' : 'N',
                 ],
                 [
                     'name' => 'diabetes_hypertension',
-                    'contents' => ($request->seriousillness==1)?'Y':'N',
-                ],[
+                    'contents' => ($request->seriousillness == 1) ? 'Y' : 'N',
+                ], [
                     'name' => 'surgeries',
-                    'contents' => ($request->diabetes_hypertension==1)?'Y':'N',
+                    'contents' => ($request->diabetes_hypertension == 1) ? 'Y' : 'N',
                 ],
                 [
                     'name' => 'majorsurgeries',
-                    'contents' => ($request->majorsurgeries==1)?'Y':'N',
+                    'contents' => ($request->majorsurgeries == 1) ? 'Y' : 'N',
                 ],
                 [
                     'name' => 'nature_of_illness',
@@ -205,7 +207,7 @@ class HospitalizationController extends Controller
                 [
                     'name' => 'policyCertificate',
                     'contents' => $request->policy,
-                ],  [
+                ], [
                     'name' => 'merchant_id',
                     'contents' => 'ceylinco123',
                 ], [
@@ -219,12 +221,12 @@ class HospitalizationController extends Controller
                     'contents' => 'Yes',
                 ],
                 [
-                    'name'     => 'nicFront',
-                    'contents' =>  $front ,
+                    'name' => 'nicFront',
+                    'contents' => $front,
                     'filename' => 'nicFront.jpg'
                 ],
                 [
-                    'name'     => 'nicBack',
+                    'name' => 'nicBack',
                     'contents' => $back,
                     'filename' => 'nicBack.jpg'
                 ],
@@ -234,10 +236,10 @@ class HospitalizationController extends Controller
                 ]
             ]
         ]);
-        if (file_exists($path.$name)) {
+        if (file_exists($path . $name)) {
 
-            @unlink($path.$name);
-            @unlink($path1.$name1);
+            @unlink($path . $name);
+            @unlink($path1 . $name1);
 
         }
         $content = $response->getBody();
@@ -246,8 +248,7 @@ class HospitalizationController extends Controller
         return Redirect::to($array['paymentLink']);
 
 
-
-
-
     }
+
+
 }
