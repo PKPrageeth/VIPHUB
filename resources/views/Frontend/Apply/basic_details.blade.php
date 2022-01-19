@@ -112,9 +112,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="validationCustom04">Permanent Address</label>
-                        <textarea class="form-control" id="validationCustom04" placeholder="Address"  required>
-
-                        </textarea>
+                        <textarea class="form-control" id="validationCustom04" placeholder="Address"  required></textarea>
 
                         <div class="invalid-feedback">
                             Please provide a valid Contact Number.

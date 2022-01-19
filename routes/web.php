@@ -19,7 +19,7 @@ Route::get('/hhhh', function () {
 
 Route::get('/', [App\Http\Controllers\Frontend\PageController::class, 'indexPage']);
 Route::get('index/{var}', [App\Http\Controllers\Frontend\PageController::class, 'categoryLoad']);
-Route::get('/basic_details/{var}', [App\Http\Controllers\Frontend\PageController::class, 'basic_details']);
+Route::get('/basic_details/{var}/{var1}', [App\Http\Controllers\Frontend\PageController::class, 'basic_details']);
 
 
 
@@ -41,6 +41,11 @@ Route::post('/thirdparty/basic_details', [App\Http\Controllers\Frontend\Thirdpar
 Route::get('/thirdparty/step2', [App\Http\Controllers\Frontend\Thirdparty\ThirdPartyController::class, 'step1']);
 Route::post('/step3/data/thirdparty', [App\Http\Controllers\Frontend\Thirdparty\ThirdPartyController::class, 'Finlstep']);
 
+
+//Seriouse Ilness
+Route::post('/serious-illness/basic_details', [App\Http\Controllers\Frontend\SeriousIlness\SeriousIlnessController::class, 'basic_details']);
+Route::get('/serious-illness/step2', [App\Http\Controllers\Frontend\SeriousIlness\SeriousIlnessController::class, 'step1']);
+Route::post('//step3/data/serious_illness', [App\Http\Controllers\Frontend\SeriousIlness\SeriousIlnessController::class, 'Finlstep']);
 
 //response
 Route::get('/success', [App\Http\Controllers\Frontend\PageController::class, 'success']);

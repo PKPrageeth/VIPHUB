@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\Gedara;
+namespace App\Http\Controllers\Frontend\SeriousIlness;
 
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
@@ -8,80 +8,85 @@ use GuzzleHttp\Psr7;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class GedaraController extends Controller
+class SeriousIlnessController extends Controller
 {
     function basic_details(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'apply' => 'required',
+            'Full_Name' => 'required',
+            'email' => 'required',
+            'Contact_Number' => 'required|max:10|min:10',
+            'nic' => ['required',
+                function ($attribute, $value, $fail) {
+                    if( is_int( $value ) && strlen($value)==12 && preg_match('/^([0-9]{12})$/',$value)) {
+                        return true;
+                    } else if(strlen($value)==10 && preg_match('/^([0-9]{9}[vVxX]{1})$/',$value)){
+                        return true;
+                    }else{
+                        $fail($attribute.' is invalid.');
+                    }
+                },
+                ],
+            'Permanent_Address' => 'required',
+            'dob' => 'required',
+            'plan' => 'required',
+        ]);
+        $client1 = new Client();
+        $resp = $client1->request('POST', 'https://marketplace-test.paymediasolutions.com/api/validateInsuredNICInThirdPartyCompanyCustomer', [
+            'form_params' => [
+                'token' => '753799f5eb9c413b957c2dca36897a91a47ca4916ac0400d60b9e40d9b351a4eee786de5e11a26421a0f258a657759118c0cb8fd3c2a39c4269a8bdf5c7dacbb',
+                'merchant_id' => 'ceylinco123',
+                'insured_is' => $request->apply,
+                "customer_nic" => $request->nic,
+                "date_of_birth" => $request->dob,
+                "insurance_policy_id" => 'ceylinco-serious-illness',
+            ]
+        ]);
+        $responseCat = $resp->getBody();
+        $responseCatArray = json_decode($responseCat, true);
+        if(!$responseCatArray['data']['policyExists']){
+            return back()->with('error','this policy already taken by you');
+        }
 
         $data = [];
         $data['title'] = $request->title;
-        $data['fname'] = $request->fname;
+        $data['apply'] = $request->apply;
+        $data['plan'] = $request->plan;
+        $data['premium'] = $request->premium;
+        $data['Guardian'] = $request->Guardian;
+        $data['Relationship'] = $request->Relationship;
+        $data['Full_Name'] = $request->Full_Name;
         $data['email'] = $request->email;
-        $data['mobile'] = $request->mobile;
+        $data['Contact_Number'] = $request->Contact_Number;
         $data['nic'] = $request->nic;
-        $data['address'] = $request->address;
+        $data['Permanent_Address'] = $request->Permanent_Address;
         $data['dob'] = $request->dob;
-        $data['mortgagee'] = $request->mortgagee;
 
-        session(['Gedara' => $data]);
-        return redirect('gedara/step2');
-
+        session(['serious-illness' => $data]);
+        return redirect('/serious-illness/step2');
     }
-    public function Gedara_step1()
+    public function step1(Request $request)
     {
-        if (session('Gedara')) {
-            return view('Frontend.Apply.Property.step2');
-        }else{
-
-            return redirect('/basic_details/ceylinco-gedara');
-        }
-
-    }
-    public function step2(Request $request)
-    {
-        $item=$request->item;
-        $make=$request->make;
-        $model=$request->model;
-        $value=$request->value;
-        $tick=$request->tick;
-        $itemList=[];
-        for ($i=0;$i<count($item);$i++){
-            $itemList[]=[
-                'itemtype'=>$item[$i],
-                'make'=>$make[$i],
-                'model'=>$model[$i],
-                'value'=>$value[$i],
-                'burglarycover'=>$tick[$i],
-
-            ];
-
-        }
-
-        $data = session('Gedara');
-        $data['wall'] = $request->wall;
-        $data['roof'] = $request->roof;
-        $data['ceiling'] = $request->ceiling;
-        $data['lit'] = $request->lit;
-        $data['itemlist'] = json_encode($itemList);
-
-        session(['Gedara' => $data]);
-
-    return redirect('gedara/step3');
-
-
-    }
-    public function step3(Request $request)
-    {
-        if (session('Gedara')) {
-            return view('Frontend.Apply.Property.step3');
-        }else{
-            return redirect('/basic_details/ceylinco-gedara');
+        if (session('serious-illness')) {
+            return view('Frontend.Apply.SeriousIlness.step1');
+        } else {
+            return redirect('/basic_details/ceylinco-serious-illness');
         }
 
 
     }
+
     function Finlstep(Request $request){
-        $data = session('Gedara');
+        $request->validate([
+
+            'nicf' => 'required',
+            'nicb' => 'required',
+            'policy' => 'required',
+        ]);
+
+        $data = session('serious-illness');
 //        dd($data);
 
         $file = $request->file('nicf');
@@ -93,7 +98,7 @@ class GedaraController extends Controller
 
         $name1 = time() . '_' . $file1->getClientOriginalName();
         $path1 = base_path() . '/public/images/';
-        $file1->move(public_path('/images'), $name);
+        $file1->move(public_path('/images'), $name1);
 
         $front =  Psr7\Utils::tryFopen( $path.$name,'r');
         $back  =  Psr7\Utils::tryFopen( $path1.$name1,'r');
@@ -114,7 +119,7 @@ class GedaraController extends Controller
             'clientNumber'  =>  "102425",
             'type'          =>  'file',
         );
-        $response = $client->post("https://marketplace-test.paymediasolutions.com/api/createGedaraPolicyToThirdPartyCompanyCustomer", [
+        $response = $client->post("https://marketplace-test.paymediasolutions.com/api/createSeriousIllnessPolicyToThirdPartyCompanyCustomer", [
             'multipart' => [
                 [
                     'name' => 'title',
@@ -122,11 +127,11 @@ class GedaraController extends Controller
                 ],
                 [
                     'name' => 'full_name',
-                    'contents' =>  $data['fname'],
+                    'contents' =>  $data['Full_Name'],
                 ],
                 [
                     'name' => 'permenent_addr',
-                    'contents' =>  $data['address'],
+                    'contents' =>  $data['Permanent_Address'],
                 ],[
                     'name' => 'date_of_birth',
                     'contents' => $data['dob'],
@@ -136,36 +141,28 @@ class GedaraController extends Controller
                     'contents' => $data['nic'],
                 ],
                 [
+                    'name' => 'contact_no',
+                    'contents' => $data['Contact_Number'],
+                ],
+                [
                     'name' => 'email',
                     'contents' => $data['email'],
                 ],
                 [
-                    'name' => 'mortgagee_name',
-                    'contents' =>  $data['mortgagee'],
+                    'name' => 'insured_is',
+                    'contents' => $data['apply'],
                 ],
                 [
-                    'name' => 'contact_no',
-                    'contents' => $data['mobile'],
+                    'name' => 'guardian_name',
+                    'contents' => $data['Guardian'],
                 ],
                 [
-                    'name' => 'walls',
-                    'contents' =>$data['wall'],
+                    'name' => 'relationship',
+                    'contents' => $data['Relationship'],
                 ],
                 [
-                    'name' => 'roof',
-                    'contents' => $data['roof'],
-                ],
-                [
-                    'name' => 'ceiling',
-                    'contents' => $data['ceiling'],
-                ],
-                [
-                    'name' => 'litby',
-                    'contents' => $data['lit'],
-                ],
-                [
-                    'name' => 'itemList',
-                    'contents' => $data['itemlist'],
+                    'name' => 'preferredPlan',
+                    'contents' => $data['plan'],
                 ],
                 [
                     'name' => 'seriousIllness',
@@ -193,7 +190,7 @@ class GedaraController extends Controller
 
                 [
                     'name' => 'premium',
-                    'contents' => '5000',
+                    'contents' => $data['premium'],
                 ],
                 [
                     'name' => 'policyCertificate',
@@ -239,10 +236,8 @@ class GedaraController extends Controller
         return Redirect::to($array['paymentLink']);
 
 
-        return view('Frontend.Apply.Property.step3');
 
 
 
     }
-
 }

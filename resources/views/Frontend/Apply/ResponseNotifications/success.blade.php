@@ -54,12 +54,15 @@
     </div>
 </nav>
 <div class="container">
-        <div class="card mt-5">
-            <div class="card-body text-center">
-                <h1 class="text-success">Payment Success</h1>
-                <h3>{{$paymentStatus}}</h3>
-            </div>
+    <div class="card mt-5">
+        <div class="card-body text-center">
+            <img src="{{asset('/images/VIP-01.png')}}" alt="">
+            <h1 class="text-success">PAYMENT {{$paymentStatus}}</h1>
+            <a href="{{url("/")}}">
+                <button class="btn btn-outline-warning ">Back To Home</button>
+            </a>
         </div>
+    </div>
 
 
 </div>
