@@ -46,7 +46,7 @@ class SeriousIlnessController extends Controller
         ]);
         $responseCat = $resp->getBody();
         $responseCatArray = json_decode($responseCat, true);
-        if(!$responseCatArray['data']['policyExists']){
+        if($responseCatArray['data']['policyExists']){
             return back()->with('error','this policy already taken by you');
         }
 
