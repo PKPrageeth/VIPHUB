@@ -46,7 +46,7 @@ class SeriousIlnessController extends Controller
             ],
             'nic' => ['required',
                 function ($attribute, $value, $fail) {
-                    if (is_int($value) && strlen($value) == 12 && preg_match('/^([0-9]{12})$/', $value)) {
+                    if (preg_match('/^([0-9]{12})$/', $value)) {
                         return true;
                     } else if (strlen($value) == 10 && preg_match('/^([0-9]{9}[vVxX]{1})$/', $value)) {
                         return true;
@@ -275,8 +275,11 @@ class SeriousIlnessController extends Controller
         }
         $content = $response->getBody();
         $array = json_decode($content, true);
-
-        return Redirect::to($array['paymentLink']);
+        if ($array['success']) {
+            return Redirect::to($array['paymentLink']);
+        } else {
+            return back()->withInput($request->input())->with('error', $array['message']);
+        }
 
 
     }

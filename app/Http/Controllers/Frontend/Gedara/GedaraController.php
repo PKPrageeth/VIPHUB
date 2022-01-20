@@ -45,7 +45,7 @@ class GedaraController extends Controller
             ],
             'nic' => ['required',
                 function ($attribute, $value, $fail) {
-                    if (is_int($value) && strlen($value) == 12 && preg_match('/^([0-9]{12})$/', $value)) {
+                    if (preg_match('/^([0-9]{12})$/', $value)) {
                         return true;
                     } else if (strlen($value) == 10 && preg_match('/^([0-9]{9}[vVxX]{1})$/', $value)) {
                         return true;
@@ -107,7 +107,7 @@ class GedaraController extends Controller
         $request->validate([
             'value.*' => ['required_with:item.*',
                 function ($attribute, $value, $fail) {
-                    if (preg_match('/^[0-9]+$/', $value)) {
+                    if (preg_match('/^[0-9.,]+$/', $value)) {
                         return true;
                     } else {
                         $fail('Value is invalid.');

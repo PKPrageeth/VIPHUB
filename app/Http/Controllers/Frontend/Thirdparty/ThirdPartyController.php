@@ -45,7 +45,7 @@ class ThirdPartyController extends Controller
             ],
             'nic' => ['required',
                 function ($attribute, $value, $fail) {
-                    if (is_int($value) && strlen($value) == 12 && preg_match('/^([0-9]{12})$/', $value)) {
+                    if (preg_match('/^([0-9]{12})$/', $value)) {
                         return true;
                     } else if (strlen($value) == 10 && preg_match('/^([0-9]{9}[vVxX]{1})$/', $value)) {
                         return true;
@@ -190,7 +190,7 @@ class ThirdPartyController extends Controller
                     if (preg_match('/^[0-9]{4}$/', $value)) {
                         return true;
                     } else {
-                        $fail($attribute . ' is invalid.');
+                        $fail('Year of make is invalid.');
                     }
                 },
             ],
@@ -206,7 +206,7 @@ class ThirdPartyController extends Controller
                 },],
             'Beneficiary_NIC' => ['required',
                 function ($attribute, $value, $fail) {
-                    if (is_int($value) && strlen($value) == 12 && preg_match('/^([0-9]{12})$/', $value)) {
+                    if (preg_match('/^([0-9]{12})$/', $value)) {
                         return true;
                     } else if (strlen($value) == 10 && preg_match('/^([0-9]{9}[vVxX]{1})$/', $value)) {
                         return true;

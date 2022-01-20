@@ -149,7 +149,7 @@ function readURLNICb(input) {
         reader.readAsDataURL(input.files[0]);
 
     } else {
-        removeUpload();
+        removeUpload1();
     }
 }
 
@@ -170,7 +170,7 @@ function readURLVehi(input) {
         reader.readAsDataURL(input.files[0]);
 
     } else {
-        removeUpload();
+        removeUpload2();
     }
 }
 
