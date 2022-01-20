@@ -130,8 +130,8 @@ class HospitalizationController extends Controller
 
         ]);
 
-        $data = session('serious-illness');
-        dd($data);
+        $data = session('hospitl');
+//        dd($data);
 
         $file = $request->file('nicf');
 
