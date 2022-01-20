@@ -41,15 +41,18 @@
                                 <div class="form-check form-check-inline">
                                     <input name="wall" type="radio" class="form-check-input" id="validationCustom01"
                                            value="Briks" placeholder="Briks" required>
-                                    <label class="form-check-label" for="inlineRadio1">Briks</label>
+                                    <label class="form-check-label" for="validationCustom01">Briks</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="wall" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="wall" type="radio" class="form-check-input" id="validationCustom02"
                                            value="Cement Blocks" placeholder="Briks" required>
-                                    <label class="form-check-label" for="inlineRadio2">Cement Blocks</label>
+                                    <label class="form-check-label" for="validationCustom02">Cement Blocks</label>
                                 </div>
-                            </div>
 
+                            </div>
+                            @error('wall')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
 
@@ -60,22 +63,25 @@
                             <div class="col-md-4"><label for="validationCustom01">Roof</label></div>
                             <div class="col-md-8">
                                 <div class="form-check form-check-inline">
-                                    <input name="roof" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="roof" type="radio" class="form-check-input" id="validationCustom03"
                                            value="Asbestos" placeholder="Briks" required>
-                                    <label class="form-check-label" for="inlineRadio1">Asbestos</label>
+                                    <label class="form-check-label" for="validationCustom03">Asbestos</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="roof" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="roof" type="radio" class="form-check-input" id="validationCustom04"
                                            value="Tiles" placeholder="Briks" required>
-                                    <label class="form-check-label" for="inlineRadio2">Tiles</label>
+                                    <label class="form-check-label" for="validationCustom04">Tiles</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="roof" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="roof" type="radio" class="form-check-input" id="validationCustom05"
                                            value="Concrete" placeholder="Briks" required>
-                                    <label class="form-check-label" for="inlineRadio2">Concrete</label>
+                                    <label class="form-check-label" for="validationCustom05">Concrete</label>
                                 </div>
-                            </div>
 
+                            </div>
+                            @error('roof')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
 
@@ -89,28 +95,30 @@
                             <div class="col-md-4"><label for="validationCustom01">Ceiling made of</label></div>
                             <div class="col-md-8">
                                 <div class="form-check form-check-inline">
-                                    <input name="ceiling" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="ceiling" type="radio" class="form-check-input" id="validationCustom06"
                                            value="Asbestos" placeholder="Briks" required>
-                                    <label class="form-check-label" for="inlineRadio1">Asbestos</label>
+                                    <label class="form-check-label" for="validationCustom06">Asbestos</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="ceiling" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="ceiling" type="radio" class="form-check-input" id="validationCustom07"
                                            value="Plastic" placeholder="Briks" required>
-                                    <label class="form-check-label" for="inlineRadio2">Plastic</label>
+                                    <label class="form-check-label" for="validationCustom07">Plastic</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="ceiling" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="ceiling" type="radio" class="form-check-input" id="validationCustom08"
                                            value="Wood" placeholder="Briks" required>
-                                    <label class="form-check-label" for="inlineRadio2">Wood</label>
+                                    <label class="form-check-label" for="validationCustom08">Wood</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="ceiling" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="ceiling" type="radio" class="form-check-input" id="validationCustom09"
                                            value="None" placeholder="Briks" required>
-                                    <label class="form-check-label" for="inlineRadio2">None</label>
+                                    <label class="form-check-label" for="validationCustom09">None</label>
                                 </div>
 
                             </div>
-
+                            @error('ceiling')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
 
@@ -121,28 +129,30 @@
                             <div class="col-md-4"><label for="validationCustom01">Lit by</label></div>
                             <div class="col-md-8">
                                 <div class="form-check form-check-inline">
-                                    <input name="lit" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="lit" type="radio" class="form-check-input" id="validationCustom10"
                                            value="Asbestos" placeholder="Briks" required>
-                                    <label class="form-check-label" for="inlineRadio1">LED</label>
+                                    <label class="form-check-label" for="validationCustom10">LED</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="lit" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="lit" type="radio" class="form-check-input" id="validationCustom11"
                                            value="Plastic" placeholder="Briks" required>
-                                    <label class="form-check-label" for="inlineRadio2">Plastic</label>
+                                    <label class="form-check-label" for="validationCustom11">Plastic</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="lit" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="lit" type="radio" class="form-check-input" id="validationCustom12"
                                            value="Wood" placeholder="Briks" required>
-                                    <label class="form-check-label" for="inlineRadio2">Wood</label>
+                                    <label class="form-check-label" for="validationCustom12">Wood</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="lit" type="radio" class="form-check-input" id="validationCustom01"
+                                    <input name="lit" type="radio" class="form-check-input" id="validationCustom13"
                                            value="None" placeholder="Briks" required>
-                                    <label class="form-check-label" for="inlineRadio2">None</label>
+                                    <label class="form-check-label" for="validationCustom13">None</label>
                                 </div>
 
                             </div>
-
+                            @error('lit')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
 
@@ -150,63 +160,171 @@
                     <div class="col-md-6"></div>
                 </div>
                 <div class="row">
+
                     <div class="card" id="item-holder">
-                        <div class="card-body mb-3 item-card" id="items">
-                            <div class="row flex">
+                        {{--                        {{dd(old('value'));}}--}}
+                        @if(old('value'))
 
-                                <div class="col-md-4 col-lg-2 col-12 mb-3">
-                                    <label for="validationCustom01">ITEM TO BE INSURED</label>
-                                    <input name='item[]' type="text" class="form-control" id="validationCustom01"
-                                           placeholder="Mark Anthony"
-                                           required>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid Name.
+                            @for($i=0;count(old('value'))>$i;$i++)
+
+                                <div class="card-body mb-3 item-card" id="items{{$i}}">
+                                    <div class="row flex">
+
+                                        <div class="col-md-4 col-lg-2 col-12 mb-3">
+                                            @error('item.'.$i)
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror  @if($i==0)<br>
+                                                <label for="validationCustom01">ITEM TO BE INSURED</label> @endif
+
+                                            <input name='item[]' value="{{old("item.".$i)}}" type="text"
+                                                   class="form-control"
+                                                   id="validationCustom01"
+                                                   placeholder="Mark Anthony"
+                                                   required>
+
+                                        </div>
+                                        <div class="col-md-4 col-lg-2 col-12 mb-3">
+                                            @error('make.'.$i)
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror @if($i==0)<br>
+                                                <label for="validationCustom01">MAKE</label> @endif
+
+
+                                            <input value="{{old("make.".$i)}}" name='make[]' type="text"
+                                                   class="form-control"
+                                                   id="validationCustom01"
+                                                   placeholder="Mark Anthony"
+                                                   required>
+
+                                        </div>
+
+                                        <div class="col-md-4 col-lg-2 col-12 mb-3">
+                                            @error('model.'.$i)
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror @if($i==0)<br>
+                                                <label for="validationCustom01">MODEL/ SERIAL NO</label> @endif
+
+                                            <input value="{{old("model.".$i)}}" name='model[]' type="text"
+                                                   class="form-control"
+                                                   id="validationCustom01"
+                                                   placeholder="Mark Anthony"
+                                                   required>
+
+                                        </div>
+
+                                        <div class="col-md-4 col-lg-2 col-12 mb-3">
+                                            @error('value.'.$i)
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+
+                                            @if($i==0)
+                                                <br>
+                                                <label for="validationCustom01">VALUE</label> @endif
+
+                                            <input value="{{old("value.".$i)}}" name='value[]' type="text"
+                                                   class="form-control"
+                                                   id="validationCustom01"
+                                                   placeholder="Mark Anthony"
+                                                   required>
+
+
+                                        </div>
+
+                                        <div class="col-md-4 col-lg-2 col-12 mb-3">
+                                            @if($i==0)
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">FOR
+                                                    BURGLARY
+                                                    COVER
+                                                    UPTO RS:300,000/= (PLEASE TICK)</label>
+                                            @endif
+                                            <div class="form-check form-switch">
+
+                                                <input class="form-check-input"
+                                                       {{(old("tick.".$i)==1)?"checked":"0"}} type="checkbox"
+                                                       id="ch{{$i}}"
+                                                       onclick="tick({{$i}})">
+                                                <input id='tik{{$i}}' type='hidden'
+                                                       value='{{(old("tick.".$i)==1)?"1":"0"}}' name='tick[]'>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-2 col-12 mb-3">
+                                            @if($i>0)
+                                                <button type='button' onclick='remove({{$i}})'
+                                                        class="btn btn-danger btn-sm">
+                                                    REMOVE
+                                                </button>
+                                            @endif
+                                        </div>
+
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-lg-2 col-12 mb-3">
-                                    <label for="validationCustom01">MAKE</label>
-                                    <input name='make[]' type="text" class="form-control" id="validationCustom01"
-                                           placeholder="Mark Anthony"
-                                           required>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid Name.
+
+
+
+                            @endfor
+                        @else
+                            <div class="card-body mb-3 item-card" id="items">
+                                <div class="row flex">
+
+                                    <div class="col-md-4 col-lg-2 col-12 mb-3">
+                                        <label for="validationCustom01">ITEM TO BE INSURED</label>
+                                        <input name='item[]' type="text" class="form-control" id="validationCustom01"
+                                               placeholder="Mark Anthony"
+                                               required>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid Name.
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="col-md-4 col-lg-2 col-12 mb-3">
-                                    <label for="validationCustom01">MODEL/ SERIAL NO</label>
-                                    <input name='model[]' type="text" class="form-control" id="validationCustom01"
-                                           placeholder="Mark Anthony"
-                                           required>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid Name.
+                                    <div class="col-md-4 col-lg-2 col-12 mb-3">
+                                        <label for="validationCustom01">MAKE</label>
+                                        <input name='make[]' type="text" class="form-control" id="validationCustom01"
+                                               placeholder="Mark Anthony"
+                                               required>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid Name.
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-4 col-lg-2 col-12 mb-3">
-                                    <label  for="validationCustom01">VALUE</label>
-                                    <input name='value[]' type="text" class="form-control" id="validationCustom01"
-                                           placeholder="Mark Anthony"
-                                           required>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid Name.
+                                    <div class="col-md-4 col-lg-2 col-12 mb-3">
+                                        <label for="validationCustom01">MODEL/ SERIAL NO</label>
+                                        <input name='model[]' type="text" class="form-control" id="validationCustom01"
+                                               placeholder="Mark Anthony"
+                                               required>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid Name.
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-4 col-lg-2 col-12 mb-3">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">FOR BURGLARY COVER UPTO RS:300,000/= (PLEASE TICK)</label>
-                                    <div class="form-check form-switch">
+                                    <div class="col-md-4 col-lg-2 col-12 mb-3">
+                                        <label for="validationCustom01">VALUE</label>
+                                        <input name='value[]' type="text" class="form-control" id="validationCustom01"
+                                               placeholder="Mark Anthony"
+                                               required>
 
-                                        <input class="form-check-input"  type="checkbox" id="ch0" onclick="tick('0')">
-                                        <input id='tik0' type='hidden' value='0' name='tick[]'>
                                     </div>
-                                </div>
-                                <div class="col-md-4 col-lg-2 col-12 mb-3">
+
+                                    <div class="col-md-4 col-lg-2 col-12 mb-3">
+                                        <label class="form-check-label" for="flexSwitchCheckDefault">FOR BURGLARY COVER
+                                            UPTO RS:300,000/= (PLEASE TICK)</label>
+                                        <div class="form-check form-switch">
+
+                                            <input class="form-check-input" type="checkbox" id="ch0"
+                                                   onclick="tick('0')">
+                                            <input id='tik0' type='hidden' value='0' name='tick[]'>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-lg-2 col-12 mb-3">
+
+                                    </div>
 
                                 </div>
-
                             </div>
-                        </div>
+                            @error('value.*')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        @endif
+
+
                     </div>
 
                 </div>

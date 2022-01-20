@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="form-check form-switch">
-                                    <input name="seriousillness" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                    <input {{(old('seriousillness'))?"checked":""}} name="seriousillness" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
 
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                             <div class="col-md-4"><label for="validationCustom01">Diabetes/Hypertension</label></div>
                             <div class="col-md-8">
                                 <div class="form-check form-switch">
-                                    <input name="diabetes_hypertension" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                    <input {{(old('diabetes_hypertension'))?"checked":""}} name="diabetes_hypertension" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
 
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                     years? </label></div>
                             <div class="col-md-8">
                                 <div class="form-check form-switch">
-                                    <input name="majorsurgeries" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                    <input {{(old('majorsurgeries'))?"checked":""}} name="majorsurgeries" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
 
                                 </div>
 
@@ -94,8 +94,10 @@
                         <div class="row">
                             <div class="col-md-4">Nature of the Illness/Illnesses</div>
                             <div class="col-md-8">
-                                <textarea name="nature_of_illness" class="form-control" rows="5" placeholder="Player Details"></textarea>
-
+                                <textarea name="nature_of_illness" class="form-control" rows="5" placeholder="Nature of the Illness/Illnesses">{{old('nature_of_illness')}}</textarea>
+                                @error('nature_of_illness')
+                                <span class="text-danger">The Nature of the Illness is required.</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -103,8 +105,10 @@
                         <div class="row">
                             <div class="col-md-4">Type Of surgery</div>
                             <div class="col-md-8">
-                                <textarea name="typeofsurgerie" class="form-control" rows="5" placeholder="Player Details"></textarea>
-
+                                <textarea name="typeofsurgerie" class="form-control" rows="5"placeholder="Type Of surgery">{{old('typeofsurgerie')}}</textarea>
+                                @error('typeofsurgerie')
+                                <span class="text-danger">The Type Of surgery is required.</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -134,6 +138,9 @@
                                                 class="image-title">Uploaded Image</span></button>
                                     </div>
                                 </div>
+                                @error('nicf')
+                                <span class="text-danger">The NIC Front Image is required.</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -160,6 +167,9 @@
                                                     class="image-title">Uploaded Image</span></button>
                                         </div>
                                     </div>
+                                    @error('nicb')
+                                    <span class="text-danger">The NIC Back Image is required.</span>
+                                    @enderror
                                 </div>
 
                         </div>
@@ -190,7 +200,9 @@
                                         Both
                                     </label>
                                 </div>
-
+                                @error('policy')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>

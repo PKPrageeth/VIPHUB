@@ -33,6 +33,8 @@
             <form method="post" class="needs-validation" action="{{url("/thirdparty/basic_details")}}" novalidate>
                 @csrf
                 <input type="hidden" value="{{$premium}}" name="premium">
+
+                <input type="hidden" value="{{$plan}}" name="plan">
                 <div class="row">
                     <div class="col-md-2 mb-3">
                         <label for="validationCustom02">Title</label>

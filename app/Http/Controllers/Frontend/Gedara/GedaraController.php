@@ -12,7 +12,68 @@ class GedaraController extends Controller
 {
     function basic_details(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'fname' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^[a-zA-Z][a-zA-Z ]{1,127}$/', $value)) {
+                        return true;
+                    } else {
+                        $fail('Full Name is invalid.');
+                    }
+                },
+            ],
+            'email' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },
+            ],
+            'mobile' => [
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^[0-9]{10}$/', $value)) {
+                        return true;
+                    } else {
+                        $fail('Contact Number is invalid.');
+                    }
+                }, 'required', 'max:10', 'min:10',
 
+
+            ],
+            'nic' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (is_int($value) && strlen($value) == 12 && preg_match('/^([0-9]{12})$/', $value)) {
+                        return true;
+                    } else if (strlen($value) == 10 && preg_match('/^([0-9]{9}[vVxX]{1})$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },
+            ],
+            'address' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^[a-zA-Z0-9][a-zA-Z0-9 ]+$/', $value)) {
+                        return true;
+                    } else {
+                        $fail('Permanent Address is invalid.');
+                    }
+                },
+            ],
+            'mortgagee' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^[a-zA-Z][a-zA-Z ]{1,127}$/', $value)) {
+                        return true;
+                    } else {
+                        $fail('Permanent Address is invalid.');
+                    }
+                },
+            ],
+            'dob' => 'required',
+        ]);
         $data = [];
         $data['title'] = $request->title;
         $data['fname'] = $request->fname;
@@ -40,6 +101,48 @@ class GedaraController extends Controller
     }
     public function step2(Request $request)
     {
+        $customMessages = [
+            'required_with' => 'This field is required.'
+        ];
+        $request->validate([
+            'value.*' => ['required_with:item.*',
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^[0-9]+$/', $value)) {
+                        return true;
+                    } else {
+                        $fail('Value is invalid.');
+                    }
+                },'max:15',
+
+
+            ],
+            'make.*' => ['required_with:item.*',
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^[a-zA-Z0-9][a-zA-Z0-9 ]+$/', $value)) {
+                        return true;
+                    } else {
+                        $fail('Make is invalid.');
+                    }
+                },'max:15',
+
+
+            ], 'model.*' => ['required_with:item.*',
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^[a-zA-Z0-9][a-zA-Z0-9 ]+$/', $value)) {
+                        return true;
+                    } else {
+                        $fail('Model is invalid.');
+                    }
+                },'max:15',
+
+
+            ],
+            'wall'=>'required',
+            'roof'=>'required',
+            'ceiling'=>'required',
+            'lit'=>'required',
+        ],$customMessages);
+
         $item=$request->item;
         $make=$request->make;
         $model=$request->model;
@@ -82,6 +185,21 @@ class GedaraController extends Controller
 
     }
     function Finlstep(Request $request){
+
+        $request->validate([
+
+            'nicf' => 'required',
+            'nicb' => 'required',
+            'policy' => 'required',
+            'nature_of_illness' => ['required_with:seriousillness'],
+            'typeofsurgerie' => ['required_with:majorsurgeries'],
+        ]);
+
+        $token = env("TOKEN");
+        $url = env("CEYLINCO_GEDARA_URL");
+        $merchant_id= env("MERCHANT_ID");
+
+
         $data = session('Gedara');
 //        dd($data);
 
@@ -115,7 +233,7 @@ class GedaraController extends Controller
             'clientNumber'  =>  "102425",
             'type'          =>  'file',
         );
-        $response = $client->post("https://marketplace-test.paymediasolutions.com/api/createGedaraPolicyToThirdPartyCompanyCustomer", [
+        $response = $client->post($url, [
             'multipart' => [
                 [
                     'name' => 'title',
@@ -201,10 +319,10 @@ class GedaraController extends Controller
                     'contents' => $request->policy,
                 ],  [
                     'name' => 'merchant_id',
-                    'contents' => 'ceylinco123',
+                    'contents' => $merchant_id,
                 ], [
                     'name' => 'token',
-                    'contents' => '753799f5eb9c413b957c2dca36897a91a47ca4916ac0400d60b9e40d9b351a4eee786de5e11a26421a0f258a657759118c0cb8fd3c2a39c4269a8bdf5c7dacbb',
+                    'contents' => $token ,
                 ], [
                     'name' => 'payment_done',
                     'contents' => 'No',

@@ -13,13 +13,17 @@ class PageController extends Controller
 
     function indexPage()
     {
+        $token = env("TOKEN");
+        $cat_url = env("CEYLINCO_CATEGORY");
+        $pro_url = env("PRODUCT_LIST");
+        $merchant_id= env("MERCHANT_ID");
 
         $client = new Client();
 
-        $res = $client->request('POST', 'https://marketplace-test.paymediasolutions.com/api/getInsuranceCategoryListOfCompanyForThirdParty', [
+        $res = $client->request('POST',  $cat_url, [
             'form_params' => [
-                'token' => '753799f5eb9c413b957c2dca36897a91a47ca4916ac0400d60b9e40d9b351a4eee786de5e11a26421a0f258a657759118c0cb8fd3c2a39c4269a8bdf5c7dacbb',
-                'merchant_id' => 'ceylinco123',
+                'token' => $token,
+                'merchant_id' => $merchant_id,
                 'insuranceCompanyId' => '2',
             ]
         ]);
@@ -32,10 +36,10 @@ class PageController extends Controller
             $menu = $responseArray['insuranceCategories'];
             foreach ($menu as $item) {
                 $client1 = new Client();
-                $resp = $client1->request('POST', 'https://marketplace-test.paymediasolutions.com/api/getActiveInsuranceListOfCompanyForThirdParty', [
+                $resp = $client1->request('POST', $pro_url, [
                     'form_params' => [
-                        'token' => '753799f5eb9c413b957c2dca36897a91a47ca4916ac0400d60b9e40d9b351a4eee786de5e11a26421a0f258a657759118c0cb8fd3c2a39c4269a8bdf5c7dacbb',
-                        'merchant_id' => 'ceylinco123',
+                        'token' => $token,
+                        'merchant_id' =>  $merchant_id,
                         'insuranceCompanyId' => '2',
                         "insuranceCategory" => $item['insuranceCategory']
                     ]
@@ -59,12 +63,20 @@ class PageController extends Controller
 
     public function categoryLoad($Cat)
     {
+
+        $token = env("TOKEN");
+        $cat_url = env("CEYLINCO_CATEGORY");
+        $pro_url = env("PRODUCT_LIST");
+        $merchant_id= env("MERCHANT_ID");
+
+
+
         $client = new Client();
 
-        $res = $client->request('POST', 'https://marketplace-test.paymediasolutions.com/api/getInsuranceCategoryListOfCompanyForThirdParty', [
+        $res = $client->request('POST', $cat_url, [
             'form_params' => [
-                'token' => '753799f5eb9c413b957c2dca36897a91a47ca4916ac0400d60b9e40d9b351a4eee786de5e11a26421a0f258a657759118c0cb8fd3c2a39c4269a8bdf5c7dacbb',
-                'merchant_id' => 'ceylinco123',
+                'token' => $token,
+                'merchant_id' =>  $merchant_id,
                 'insuranceCompanyId' => '2',
             ]
         ]);
@@ -80,8 +92,8 @@ class PageController extends Controller
         $client1 = new Client();
         $resp = $client1->request('POST', 'https://marketplace-test.paymediasolutions.com/api/getActiveInsuranceListOfCompanyForThirdParty', [
             'form_params' => [
-                'token' => '753799f5eb9c413b957c2dca36897a91a47ca4916ac0400d60b9e40d9b351a4eee786de5e11a26421a0f258a657759118c0cb8fd3c2a39c4269a8bdf5c7dacbb',
-                'merchant_id' => 'ceylinco123',
+                'token' => $token,
+                'merchant_id' => $merchant_id,
                 'insuranceCompanyId' => '2',
                 "insuranceCategory" => $Cat
             ]
@@ -114,169 +126,6 @@ class PageController extends Controller
     }
 
 
-    public function step3(Request $request)
-    {
-        $file = $request->file('nicf');
-
-        $name = time() . '_' . $file->getClientOriginalName();
-        $path = base_path() . '/public/images/';
-        $file->move(public_path('/images'), $name);
-
-        $front = Psr7\Utils::tryFopen($path . $name, 'r');
-        $back = Psr7\Utils::tryFopen($path . $name, 'r');
-
-        $client = new Client([
-            'headers' => ['Content-Type' => 'multipart/form-data'],
-            'verify' => false
-        ]);
-
-
-//dd($front);
-
-
-        $client = new Client();
-        $fileinfo = array(
-            'name' => $name,
-            'clientNumber' => "102425",
-            'type' => 'file',
-        );
-        $response = $client->post("https://marketplace-test.paymediasolutions.com/api/createGedaraPolicyToThirdPartyCompanyCustomer", [
-            'multipart' => [
-                [
-                    'name' => 'title',
-                    'contents' => "Mrs",
-                ],
-                [
-                    'name' => 'full_name',
-                    'contents' => "Prageeth Sanjeewa",
-                ],
-                [
-                    'name' => 'permenent_addr',
-                    'contents' => "Kalutara",
-                ], [
-                    'name' => 'date_of_birth',
-                    'contents' => "1991/11/30",
-                ],
-                [
-                    'name' => 'customer_nic',
-                    'contents' => "913353471V",
-                ],
-                [
-                    'name' => 'email',
-                    'contents' => "pitigalaksanjeewa@gmail.com",
-                ],
-                [
-                    'name' => 'mortgagee_name',
-                    'contents' => "none",
-                ],
-                [
-                    'name' => 'contact_no',
-                    'contents' => "0772834591",
-                ],
-                [
-                    'name' => 'walls',
-                    'contents' => "Bricks",
-                ],
-                [
-                    'name' => 'roof',
-                    'contents' => "asdasd",
-                ],
-                [
-                    'name' => 'ceiling',
-                    'contents' => "asdas",
-                ],
-                [
-                    'name' => 'litby',
-                    'contents' => "asdasd",
-                ],
-                [
-                    'name' => 'itemList',
-                    'contents' => "asdsad",
-                ],
-                [
-                    'name' => 'seriousIllness',
-                    'contents' => "N",
-                ],
-                [
-                    'name' => 'diabetes_hypertension',
-                    'contents' => "N",
-                ], [
-                    'name' => 'surgeries',
-                    'contents' => "N",
-                ],
-                [
-                    'name' => 'majorsurgeries',
-                    'contents' => "N",
-                ],
-                [
-                    'name' => 'nature_of_illness',
-                    'contents' => "N",
-                ],
-                [
-                    'name' => 'typeofsurgerie',
-                    'contents' => "N",
-                ],
-                [
-                    'name' => 'nocosscentecode',
-                    'contents' => "N",
-                ],
-                [
-                    'name' => 'nocosscentecodebranch',
-                    'contents' => "N",
-                ],
-                [
-                    'name' => 'documenttype',
-                    'contents' => "N",
-                ],
-                [
-                    'name' => 'productcode',
-                    'contents' => 'GD',
-                ],
-                [
-                    'name' => 'premium',
-                    'contents' => '5000',
-                ],
-                [
-                    'name' => 'policyCertificate',
-                    'contents' => 'Both',
-                ], [
-                    'name' => 'merchant_id',
-                    'contents' => 'ceylinco123',
-                ], [
-                    'name' => 'token',
-                    'contents' => '753799f5eb9c413b957c2dca36897a91a47ca4916ac0400d60b9e40d9b351a4eee786de5e11a26421a0f258a657759118c0cb8fd3c2a39c4269a8bdf5c7dacbb',
-                ], [
-                    'name' => 'payment_done',
-                    'contents' => 'No',
-                ], [
-                    'name' => 'need_payment_link',
-                    'contents' => 'Yes',
-                ],
-                [
-                    'name' => 'nicFront',
-                    'contents' => $front,
-                    'filename' => 'nicFront.jpg'
-                ],
-                [
-                    'name' => 'nicBack',
-                    'contents' => $back,
-                    'filename' => 'nicBack.jpg'
-                ]
-            ]
-        ]);
-        if (file_exists($path . $name)) {
-
-            @unlink($path . $name);
-
-        }
-        $content = $response->getBody();
-        $array = json_decode($content, true);
-
-        return Redirect::to($array['paymentLink']);
-
-
-        return view('Frontend.Apply.Property.step3');
-    }
 
     function success()
     {

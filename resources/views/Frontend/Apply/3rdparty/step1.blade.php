@@ -30,6 +30,19 @@
             <h3>Details of the Vehicle</h3>
         </div>
         <div class="card-body">
+            @if(\Session::has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>{{\Session::get('error')}}</strong>
+
+                </div>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+                        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+                <script>
+                    $(".alert").fadeTo(2000, 1000).slideUp(1000, function() {
+                        $(".alert").slideUp(1000);
+                    });
+                </script>
+            @endif
             <form class="needs-validation" action="{{url("/step3/data/thirdparty")}}" method="post" novalidate
                   enctype='multipart/form-data'>
                 @csrf
@@ -39,7 +52,7 @@
 
 
                         <label for="validationCustom03">Registration Number</label>
-                        <input type="text" name="Registration_Number" class="form-control" id="validationCustom03" required>
+                        <input type="text" name="Registration_Number" value="{{old('Registration_Number')}}" class="form-control" id="validationCustom03" required>
                         @error('Registration_Number')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -48,7 +61,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="validationCustom03">Make and Model</label>
-                        <input type="text" name="model" class="form-control" id="validationCustom03" required>
+                        <input type="text" name="model" value="{{old('model')}}" class="form-control" id="validationCustom03" required>
                         @error('model')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -64,7 +77,7 @@
 
 
                         <label for="validationCustom03">Engine Number</label>
-                        <input type="text" name="Engine_Number" class="form-control" id="validationCustom03" required>
+                        <input type="text" name="Engine_Number" value="{{old('Engine_Number')}}" class="form-control" id="validationCustom03" required>
                         @error('Engine_Number')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -73,7 +86,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="validationCustom03">Chassis Number/ Frame Number</label>
-                        <input type="text" name="Chassis_Number" class="form-control" id="validationCustom03" required>
+                        <input type="text" name="Chassis_Number" value="{{old('Chassis_Number')}}" class="form-control" id="validationCustom03" required>
                         @error('Chassis_Number')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -89,7 +102,7 @@
 
 
                         <label for="validationCustom03">Horse Power/ Cubic Capacity</label>
-                        <input type="text" name="Horse_Power" class="form-control" id="validationCustom03" required>
+                        <input type="text" name="Horse_Power" value="{{old('Horse_Power')}}" class="form-control" id="validationCustom03" required>
                         @error('Horse_Power')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -98,7 +111,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="validationCustom03">Color</label>
-                        <input type="text" name="color" class="form-control" id="validationCustom03" required>
+                        <input type="text" name="color" value="{{old('color')}}" class="form-control" id="validationCustom03" required>
                         @error('color')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -114,7 +127,7 @@
 
 
                         <label for="validationCustom03">Carrying Capacity</label>
-                        <input type="text" name="Carrying_Capacity" class="form-control" id="validationCustom03" required>
+                        <input type="text" name="Carrying_Capacity" value="{{old('Carrying_Capacity')}}" class="form-control" id="validationCustom03" required>
                         @error('Carrying_Capacity')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -123,7 +136,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="validationCustom03">Seating Capacity</label>
-                        <input type="text" name="seating_capacity" class="form-control" id="validationCustom03" required>
+                        <input type="text" name="seating_capacity" value="{{old('seating_capacity')}}" class="form-control" id="validationCustom03" required>
                         @error('seating_capacity')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -152,19 +165,20 @@
 
 
                     </div>
+
                     <div class="col-md-6">
                         <label for="validationCustom02">Vehicle Type</label>
                         <select name="Vehicle_Type" class="form-select" id="validationCustom02" required>
 
 
-                            <option value="Motor Bike">Motor Bike</option>
-                            <option value="Three Wheeler">Three Wheeler</option>
-                            <option value="Tractors">Tractors</option>
-                            <option value="Motor Cars">Motor Cars</option>
-                            <option value="Lorry">Lorry</option>
-                            <option value="Dual Purpose vehicle private">Dual Purpose vehicle private</option>
-                            <option value="Dual Purpose vehicle hiring">Dual Purpose vehicle hiring</option>
-                            <option value="Trailers Hand Tractors">Trailers Hand Tractors</option>
+                            <option {{(\Session::get('third')['plan']=='Motor Bike')?"selected":"disabled"}} value="Motor Bike">Motor Bike</option>
+                            <option {{(\Session::get('third')['plan']=='Three Wheeler')?"selected":"disabled"}} value="Three Wheeler">Three Wheeler</option>
+                            <option {{(\Session::get('third')['plan']=='Tractors')?"selected":"disabled"}} value="Tractors">Tractors</option>
+                            <option {{(\Session::get('third')['plan']=='Motor Cars')?"selected":"disabled"}} value="Motor Cars">Motor Cars</option>
+                            <option {{(\Session::get('third')['plan']=='Lorry')?"selected":"disabled"}} value="Lorry">Lorry</option>
+                            <option {{(\Session::get('third')['plan']=='Dual Purpose vehicle private')?"selected":"disabled"}} value="Dual Purpose vehicle private">Dual Purpose vehicle private</option>
+                            <option {{(\Session::get('third')['plan']=='Dual Purpose vehicle hiring')?"selected":"disabled"}} value="Dual Purpose vehicle hiring">Dual Purpose vehicle hiring</option>
+                            <option {{(\Session::get('third')['plan']=='Trailers Hand Tractors')?"selected":"disabled"}} value="Trailers Hand Tractors">Trailers Hand Tractors</option>
 
                         </select>
 
@@ -186,7 +200,7 @@
 
                         <label for="validationCustom03">Present market value including accessories and spare
                             parts</label>
-                        <input type="text" name="market_Value" class="form-control" id="validationCustom03" required>
+                        <input type="text" name="market_Value" value="{{old('market_Value')}}" class="form-control" id="validationCustom03" required>
                         @error('market_Value')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -195,7 +209,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="validationCustom03">Year of make</label>
-                        <input type="text" name="yom" class="form-control" id="validationCustom03" required>
+                        <input type="text" name="yom" value="{{old('yom')}}" class="form-control" id="validationCustom03" required>
                         @error('yom')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -215,7 +229,7 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="form-check form-switch">
-                                    <input name="damages" class="form-check-input" type="checkbox"
+                                    <input {{old('damages')?"checked":""}} name="damages" class="form-check-input" type="checkbox"
                                            id="flexSwitchCheckDefault">
 
                                 </div>
@@ -235,50 +249,51 @@
                                 Vehicle usage
                             </div>
                             <div class="col-md-8">
+
                                 <div class="form-check">
-                                    <input name="usage[]" class="form-check-input" type="checkbox" value="Private"  id="flexCheckDefault">
+                                    <input {{old('usage')?in_array("Private", old('usage'))?"checked":"":""}} name="usage[]" class="form-check-input" type="checkbox" value="Private"  id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         Private
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input name="usage[]"  class="form-check-input" type="checkbox" value=" Rent a car"  id="flexCheckChecked">
+                                    <input name="usage[]" {{old('usage')?in_array("Rent a car", old('usage'))?"checked":"":""}}  class="form-check-input" type="checkbox" value=" Rent a car"  id="flexCheckChecked">
                                     <label class="form-check-label" for="flexCheckChecked">
                                         Rent a car
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input name="usage[]"  class="form-check-input" type="checkbox"  id="flexCheckChecked">
+                                    <input name="usage[]" {{old('usage')?in_array("Transport passengers only", old('usage'))?"checked":"":""}}  class="form-check-input" type="checkbox" value="Transport passengers only"  id="flexCheckChecked">
                                     <label class="form-check-label" for="flexCheckChecked">
                                         Transport passengers only
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input name="usage[]"  class="form-check-input" type="checkbox"  id="flexCheckChecked">
+                                    <input name="usage[]" {{old('usage')?in_array("Hiring", old('usage'))?"checked":"":""}}  class="form-check-input" type="checkbox" value="Hiring"  id="flexCheckChecked">
                                     <label class="form-check-label" for="flexCheckChecked">
                                         Hiring
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input name="usage[]"  class="form-check-input" type="checkbox" id="flexCheckChecked">
+                                    <input name="usage[]" {{old('usage')?in_array("Transport goods only", old('usage'))?"checked":"":""}}  value="Transport goods only" class="form-check-input" type="checkbox" id="flexCheckChecked">
+                                    <label class="form-check-label"  for="flexCheckChecked">
+                                        Transport goods only
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input name="usage[]" {{old('usage')?in_array("Transport goods only", old('usage'))?"checked":"":""}}  class="form-check-input" type="checkbox"  id="flexCheckChecked">
                                     <label class="form-check-label" for="flexCheckChecked">
                                         Transport goods only
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input name="usage[]"  class="form-check-input" type="checkbox"  id="flexCheckChecked">
-                                    <label class="form-check-label" for="flexCheckChecked">
-                                        Transport goods only
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input name="usage[]"  class="form-check-input" type="checkbox"  id="flexCheckChecked">
+                                    <input name="usage[]" {{old('usage')?in_array("Transport goods and passengers(both)", old('usage'))?"checked":"":""}}  value="Transport goods and passengers(both)" class="form-check-input" type="checkbox"  id="flexCheckChecked">
                                     <label class="form-check-label" for="flexCheckChecked">
                                         Transport goods and passengers(both)
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input name="usage[]"  class="form-check-input" type="checkbox"  id="flexCheckChecked">
+                                    <input name="usage[]" {{old('usage')?in_array("Any other purpose", old('usage'))?"checked":"":""}} value="Any other purpose" class="form-check-input" type="checkbox"  id="flexCheckChecked">
                                     <label class="form-check-label" for="flexCheckChecked">
                                         Any other purpose
 
@@ -299,7 +314,7 @@
 
 
                         <label for="validationCustom03">Beneficiary Name</label>
-                        <input type="text" name="Beneficiary_Name" class="form-control" id="validationCustom03" required>
+                        <input type="text" name="Beneficiary_Name"  value="{{old('Beneficiary_Name')}}" class="form-control" id="validationCustom03" required>
                         @error('Beneficiary_Name')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -308,7 +323,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="validationCustom03">Beneficiary NIC No</label>
-                        <input type="text" name="Beneficiary_NIC" class="form-control" id="validationCustom03" required>
+                        <input type="text" name="Beneficiary_NIC" value="{{old('Beneficiary_NIC')}}" class="form-control" id="validationCustom03" required>
                         @error('Beneficiary_NIC')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -324,7 +339,7 @@
 
 
                         <label for="validationCustom03">Beneficiary Relationship Type</label>
-                        <input type="text" name="Beneficiary_Relationship" class="form-control" id="validationCustom03" required>
+                        <input type="text" name="Beneficiary_Relationship" value="{{old('Beneficiary_Relationship')}}" class="form-control" id="validationCustom03" required>
                         @error('Beneficiary_Relationship')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -333,7 +348,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="validationCustom03">Endorsement Language</label>
-                        <input type="text" name="language" class="form-control" id="validationCustom03" required>
+                        <input type="text" name="language" value="{{old('language')}}" class="form-control" id="validationCustom03" required>
                         @error('language')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -351,7 +366,7 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="form-check form-switch">
-                                    <input name="declaration" class="form-check-input" type="checkbox"
+                                    <input name="declaration" value="{{old('declaration')}}" class="form-check-input" type="checkbox"
                                            id="flexSwitchCheckDefault">
 
                                 </div>
@@ -369,7 +384,7 @@
 
 
                 <div class="row mt-2">
-
+    <h1>{{old('nicf')}}</h1>
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-4">NIC Front Image</div>

@@ -15,8 +15,24 @@ class SeriousIlnessController extends Controller
         $request->validate([
             'title' => 'required',
             'apply' => 'required',
-            'Full_Name' => 'required',
-            'email' => 'required',
+            'Full_Name' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^[a-zA-Z][a-zA-Z ]{1,127}$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },
+            ],
+            'email' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },
+            ],
             'Contact_Number' => [
                 function ($attribute, $value, $fail) {
                     if (preg_match('/^[0-9]{10}$/', $value)) {
@@ -39,15 +55,27 @@ class SeriousIlnessController extends Controller
                     }
                 },
             ],
-            'Permanent_Address' => 'required',
+            'Permanent_Address' => ['required',
+                function ($attribute, $value, $fail) {
+                    if (preg_match('/^[a-zA-Z0-9][a-zA-Z0-9 ]+$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },
+            ],
             'dob' => 'required',
             'plan' => 'required',
         ]);
+        $token = env("TOKEN");
+        $url = env("CEYLINCO_NIC_VALIDATE");
+        $merchant_id= env("MERCHANT_ID");
+
         $client1 = new Client();
-        $resp = $client1->request('POST', 'https://marketplace-test.paymediasolutions.com/api/validateInsuredNICInThirdPartyCompanyCustomer', [
+        $resp = $client1->request('POST', $url, [
             'form_params' => [
-                'token' => '753799f5eb9c413b957c2dca36897a91a47ca4916ac0400d60b9e40d9b351a4eee786de5e11a26421a0f258a657759118c0cb8fd3c2a39c4269a8bdf5c7dacbb',
-                'merchant_id' => 'ceylinco123',
+                'token' => $token,
+                'merchant_id' =>  $merchant_id,
                 'insured_is' => $request->apply,
                 "customer_nic" => $request->nic,
                 "date_of_birth" => $request->dob,
@@ -124,7 +152,9 @@ class SeriousIlnessController extends Controller
 
 
 //dd($front);
-
+        $token = env("TOKEN");
+        $url = env("CEYLINCO_SERIOUS_ILLNESS_URL");
+        $merchant_id= env("MERCHANT_ID");
 
         $client = new Client();
         $fileinfo = array(
@@ -132,7 +162,7 @@ class SeriousIlnessController extends Controller
             'clientNumber' => "102425",
             'type' => 'file',
         );
-        $response = $client->post("https://marketplace-test.paymediasolutions.com/api/createSeriousIllnessPolicyToThirdPartyCompanyCustomer", [
+        $response = $client->post($url , [
             'multipart' => [
                 [
                     'name' => 'title',
@@ -210,10 +240,10 @@ class SeriousIlnessController extends Controller
                     'contents' => $request->policy,
                 ], [
                     'name' => 'merchant_id',
-                    'contents' => 'ceylinco123',
+                    'contents' =>  $merchant_id,
                 ], [
                     'name' => 'token',
-                    'contents' => '753799f5eb9c413b957c2dca36897a91a47ca4916ac0400d60b9e40d9b351a4eee786de5e11a26421a0f258a657759118c0cb8fd3c2a39c4269a8bdf5c7dacbb',
+                    'contents' => $token,
                 ], [
                     'name' => 'payment_done',
                     'contents' => 'No',

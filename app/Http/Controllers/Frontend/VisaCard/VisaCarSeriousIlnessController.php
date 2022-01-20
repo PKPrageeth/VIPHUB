@@ -44,11 +44,14 @@ class VisaCarSeriousIlnessController extends Controller
             'dob' => 'required',
             'plan' => 'required',
         ]);
+        $token = env("TOKEN");
+        $url = env("CEYLINCO_NIC_VALIDATE");
+        $merchant_id= env("MERCHANT_ID");
         $client1 = new Client();
-        $resp = $client1->request('POST', 'https://marketplace-test.paymediasolutions.com/api/validateInsuredNICInThirdPartyCompanyCustomer', [
+        $resp = $client1->request('POST', $url, [
             'form_params' => [
-                'token' => '753799f5eb9c413b957c2dca36897a91a47ca4916ac0400d60b9e40d9b351a4eee786de5e11a26421a0f258a657759118c0cb8fd3c2a39c4269a8bdf5c7dacbb',
-                'merchant_id' => 'ceylinco123',
+                'token' => $token,
+                'merchant_id' => $merchant_id,
                 'insured_is' => $request->apply,
                 "customer_nic" => $request->nic,
                 "date_of_birth" => $request->dob,
@@ -123,6 +126,9 @@ class VisaCarSeriousIlnessController extends Controller
 
 
 //dd($front);
+        $token = env("TOKEN");
+        $url = env("CEYLINCO_VISA_CARD_URL");
+        $merchant_id= env("MERCHANT_ID");
 
 
         $client = new Client();
@@ -131,7 +137,7 @@ class VisaCarSeriousIlnessController extends Controller
             'clientNumber' => "102425",
             'type' => 'file',
         );
-        $response = $client->post("https://marketplace-test.paymediasolutions.com/api/createSeriousIllnessPolicyVisaCardHoldersToThirdPartyCompanyCustomer", [
+        $response = $client->post($url, [
             'multipart' => [
                 [
                     'name' => 'title',
@@ -209,10 +215,10 @@ class VisaCarSeriousIlnessController extends Controller
                     'contents' => $request->policy,
                 ], [
                     'name' => 'merchant_id',
-                    'contents' => 'ceylinco123',
+                    'contents' => $merchant_id,
                 ], [
                     'name' => 'token',
-                    'contents' => '753799f5eb9c413b957c2dca36897a91a47ca4916ac0400d60b9e40d9b351a4eee786de5e11a26421a0f258a657759118c0cb8fd3c2a39c4269a8bdf5c7dacbb',
+                    'contents' => $token,
                 ], [
                     'name' => 'payment_done',
                     'contents' => 'No',
