@@ -90,7 +90,7 @@ class PageController extends Controller
 
 
         $client1 = new Client();
-        $resp = $client1->request('POST', 'https://marketplace-test.paymediasolutions.com/api/getActiveInsuranceListOfCompanyForThirdParty', [
+        $resp = $client1->request('POST', $pro_url, [
             'form_params' => [
                 'token' => $token,
                 'merchant_id' => $merchant_id,

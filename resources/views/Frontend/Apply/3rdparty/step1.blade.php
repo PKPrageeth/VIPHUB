@@ -548,7 +548,7 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="policy" value="Hard Copy"
+                                        <input class="form-check-input" type="radio" name="policy" value="Hard copy"
                                                id="flexRadioDefault1">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             Hard Copy

@@ -44,11 +44,11 @@
                             <label for="validationCustom02">Title</label>
                             <select name="title" class="form-select" id="validationCustom02" required>
                                 <option selected disabled hidden>Please Select Title</option>
-                                <option {{ old('title')=='Dr.'?'selected':'' }}>Dr.</option>
-                                <option {{ old('title')=='Hon.'?'selected':'' }}>Hon.</option>
-                                <option {{ old('title')=='Mr.'?'selected':'' }}>Mr.</option>
-                                <option {{ old('title')=='Mrs.'?'selected':'' }}>Mrs.</option>
-                                <option {{ old('title')=='Ms.'?'selected':'' }}>Ms.</option>
+                                <option {{ old('title')=='Mr'?'selected':'' }}>Mr</option>
+                                <option {{ old('title')=='Mrs'?'selected':'' }}>Mrs</option>
+                                <option {{ old('title')=='Miss'?'selected':'' }}>Miss</option>
+                                <option {{ old('title')=='Master'?'selected':'' }}>Master</option>
+                                <option {{ old('title')=='Rev'?'selected':'' }}>Rev</option>
                             </select>
 
                             @error('title')
