@@ -138,6 +138,7 @@ class GedaraController extends Controller
 
             ],
             'wall'=>'required',
+            'item.*'=>'required',
             'roof'=>'required',
             'ceiling'=>'required',
             'lit'=>'required',
@@ -193,6 +194,7 @@ class GedaraController extends Controller
             'policy' => 'required',
             'nature_of_illness' => ['required_with:seriousillness'],
             'typeofsurgerie' => ['required_with:majorsurgeries'],
+            'terms' => 'required',
         ]);
 
         $token = env("TOKEN");

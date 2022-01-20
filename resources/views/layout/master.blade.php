@@ -12,15 +12,15 @@
     <title>VIPHUB</title>
 </head>
 <body class="bg-dark">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="border-bottom: 2px solid #b8810b">
+<nav class="navbar navbar-dark bg-dark" style="border-bottom: 2px solid #b8810b">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{url('/')}}">
             <img src="{{asset('/images/VIP-01.png')}}" alt="">
+
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <h4 class="text-light text-end ">
+            011 239 2323
+        </h4>
 
     </div>
 </nav>

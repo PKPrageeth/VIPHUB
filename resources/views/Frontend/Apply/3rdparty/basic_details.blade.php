@@ -17,11 +17,11 @@
                             <label for="validationCustom02">Title</label>
                             <select name="title" class="form-select" id="validationCustom02" required>
                                 <option selected disabled hidden>Please Select Title</option>
-                                <option>Dr.</option>
-                                <option>Hon.</option>
-                                <option>Mr.</option>
-                                <option>Mrs.</option>
-                                <option>Ms.</option>
+                                <option {{ old('title')=='Dr.'?'selected':'' }}>Dr.</option>
+                                <option {{ old('title')=='Hon.'?'selected':'' }}>Hon.</option>
+                                <option {{ old('title')=='Mr.'?'selected':'' }}>Mr.</option>
+                                <option {{ old('title')=='Mrs.'?'selected':'' }}>Mrs.</option>
+                                <option {{ old('title')=='Ms.'?'selected':'' }}>Ms.</option>
                             </select>
 
                             @error('title')
@@ -46,7 +46,7 @@
                                    type="text" name="Permanent_Address_Line1" class="form-control"
                                    id="validationCustom03" required>
                             @error('Permanent_Address_Line1')
-                            <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger">Permanent Address Line 1 field is required.</span>
                             @enderror
                         </div>
                         <div class="col-md-4 mb-3">
@@ -55,7 +55,7 @@
                                    type="text" name="Permanent_Address_Line2" class="form-control"
                                    id="validationCustom04" required>
                             @error('Permanent_Address_Line2')
-                            <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger">Permanent Address Line 2 field is required.</span>
                             @enderror
                         </div>
                         <div class="col-md-4 mb-3">
@@ -64,7 +64,7 @@
                                    type="text" name="Permanent_Address_Line3" class="form-control"
                                    id="validationCustom05" required>
                             @error('Permanent_Address_Line3')
-                            <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger">Permanent Address Line 3 field is required.</span>
                             @enderror
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom03">Email</label>
                             <input type="email" name="email" value="{{old('email')}}" class="form-control"
-                                   id="validationCustom03" placeholder="Email" required>
+                                   id="validationCustom03" placeholder="Email" >
                             @error('email')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror

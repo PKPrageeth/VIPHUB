@@ -126,6 +126,7 @@ class SeriousIlnessController extends Controller
             'policy' => 'required',
             'nature_of_illness' => ['required_with:seriousillness'],
             'typeofsurgerie' => ['required_with:majorsurgeries'],
+            'terms' => 'required',
         ]);
 
         $data = session('serious-illness');

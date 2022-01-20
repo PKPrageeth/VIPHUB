@@ -153,14 +153,14 @@
 
                                             <div class="col-md-4 col-lg-2 col-12 mb-3">
                                                 @error('item.'.$i)
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <span class="text-danger">Item is Reuired</span>
                                                 @enderror  @if($i==0)<br>
                                                 <label for="validationCustom01">ITEM TO BE INSURED</label> @endif
 
                                                 <input name='item[]' value="{{old("item.".$i)}}" type="text"
                                                        class="form-control"
                                                        id="validationCustom01"
-                                                       placeholder="Mark Anthony"
+                                                       placeholder="ITEM"
                                                        required>
 
                                             </div>
@@ -174,7 +174,7 @@
                                                 <input value="{{old("make.".$i)}}" name='make[]' type="text"
                                                        class="form-control"
                                                        id="validationCustom01"
-                                                       placeholder="Mark Anthony"
+                                                       placeholder="MAKE"
                                                        required>
 
                                             </div>
@@ -188,7 +188,7 @@
                                                 <input value="{{old("model.".$i)}}" name='model[]' type="text"
                                                        class="form-control"
                                                        id="validationCustom01"
-                                                       placeholder="Mark Anthony"
+                                                       placeholder="MODEL"
                                                        required>
 
                                             </div>
@@ -204,8 +204,8 @@
 
                                                 <input value="{{old("value.".$i)}}" name='value[]' type="text"
                                                        class="form-control"
-                                                       id="validationCustom01"
-                                                       placeholder="Mark Anthony"
+                                                       id="currency-field" data-type="currency" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
+                                                       placeholder="VALUE"
                                                        required>
 
 
@@ -251,7 +251,7 @@
                                             <label for="validationCustom01">ITEM TO BE INSURED</label>
                                             <input name='item[]' type="text" class="form-control"
                                                    id="validationCustom01"
-                                                   placeholder="Mark Anthony"
+                                                   placeholder="ITEM"
                                                    required>
                                             <div class="invalid-feedback">
                                                 Please provide a valid Name.
@@ -261,7 +261,7 @@
                                             <label for="validationCustom01">MAKE</label>
                                             <input name='make[]' type="text" class="form-control"
                                                    id="validationCustom01"
-                                                   placeholder="Mark Anthony"
+                                                   placeholder="MAKE"
                                                    required>
                                             <div class="invalid-feedback">
                                                 Please provide a valid Name.
@@ -272,7 +272,7 @@
                                             <label for="validationCustom01">MODEL/ SERIAL NO</label>
                                             <input name='model[]' type="text" class="form-control"
                                                    id="validationCustom01"
-                                                   placeholder="Mark Anthony"
+                                                   placeholder="MODEL"
                                                    required>
                                             <div class="invalid-feedback">
                                                 Please provide a valid Name.
@@ -283,7 +283,7 @@
                                             <label for="currency-field">VALUE</label>
                                             <input name='value[]' type="text" class="form-control"
                                                    id="currency-field" data-type="currency" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
-                                                   placeholder="Mark Anthony"
+                                                   placeholder="VALUE"
                                                    required>
 
                                         </div>
@@ -340,6 +340,7 @@
 
         $("input[data-type='currency']").on({
             keyup: function() {
+
                 formatCurrency($(this));
             },
             blur: function() {

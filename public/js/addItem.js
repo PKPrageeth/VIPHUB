@@ -6,22 +6,14 @@ $(document).ready(function () {
             "\n" +
             "                                <div class=\"col-md-4 col-lg-2 col-12 mb-3\">\n" +
             "                                    <label class='mobile_label' for=\"validationCustom01\">Full Name 1</label>\n" +
-            "                                    <input name='item[]' type=\"text\" class=\"form-control\" id=\"validationCustom01\" placeholder=\"Mark Anthony\" required=\"\">\n" +
+            "                                    <input name='item[]' type=\"text\" class=\"form-control\" id=\"validationCustom01\" placeholder=\"ITEM\" required=\"\">\n" +
             "                                    <div class=\"invalid-feedback\">\n" +
             "                                        Please provide a valid Name.\n" +
             "                                    </div>\n" +
             "                                </div>\n" +
             "                                <div class=\"col-md-4 col-lg-2 col-12 mb-3\">\n" +
             "                                    <label class='mobile_label' for=\"validationCustom01\">Full Name</label>\n" +
-            "                                    <input name='make[]' type=\"text\" class=\"form-control\" id=\"validationCustom01\" placeholder=\"Mark Anthony\" required=\"\">\n" +
-            "                                    <div class=\"invalid-feedback\">\n" +
-            "                                        Please provide a valid Name.\n" +
-            "                                    </div>\n" +
-            "                                </div>\n" +
-            "\n" +
-            "                                <div class=\"col-md-4 col-lg-2 col-12 mb-3\">\n" +
-            "                                    <label class='mobile_label' for=\"validationCustom01\">Full Name</label>\n" +
-            "                                    <input name='model[]' type=\"text\" class=\"form-control\" id=\"validationCustom01\" placeholder=\"Mark Anthony\" required=\"\">\n" +
+            "                                    <input name='make[]' type=\"text\" class=\"form-control\" id=\"validationCustom01\" placeholder=\"MAKE\" required=\"\">\n" +
             "                                    <div class=\"invalid-feedback\">\n" +
             "                                        Please provide a valid Name.\n" +
             "                                    </div>\n" +
@@ -29,7 +21,15 @@ $(document).ready(function () {
             "\n" +
             "                                <div class=\"col-md-4 col-lg-2 col-12 mb-3\">\n" +
             "                                    <label class='mobile_label' for=\"validationCustom01\">Full Name</label>\n" +
-            "                                    <input name='value[]' type=\"text\" class=\"form-control\" id=\"validationCustom01\" placeholder=\"Mark Anthony\" required=\"\">\n" +
+            "                                    <input name='model[]' type=\"text\" class=\"form-control\" id=\"validationCustom01\" placeholder=\"MODEL\" required=\"\">\n" +
+            "                                    <div class=\"invalid-feedback\">\n" +
+            "                                        Please provide a valid Name.\n" +
+            "                                    </div>\n" +
+            "                                </div>\n" +
+            "\n" +
+            "                                <div class=\"col-md-4 col-lg-2 col-12 mb-3\">\n" +
+            "                                    <label class='mobile_label' for=\"validationCustom01\">Full Name</label>\n" +
+            "                                    <input name='value[]' type=\"text\" class=\"form-control\" data-type=\"currency\" pattern=\"^\\$\\d{1,3}(,\\d{3})*(\\.\\d+)?$\" placeholder=\"VALUE\" required=\"\">\n" +
             "                                    <div class=\"invalid-feedback\">\n" +
             "                                        Please provide a valid Name.\n" +
             "                                    </div>\n" +
@@ -178,7 +178,7 @@ function removeUpload() {
     $('.file-upload-input').replaceWith($('.file-upload-input').clone());
     $('.file-upload-input').val("");
     $('.file-upload-content').hide();
-    $('.file-upload-image').attr('src',"");
+    $('.file-upload-image').attr('src', "");
     $('.image-upload-wrap').show();
 }
 
@@ -216,3 +216,10 @@ $('.image-upload-wrap1').bind('dragleave', function () {
 $('.image-upload-wrap2').bind('dragleave', function () {
     $('.image-upload-wrap2').removeClass('image-dropping');
 });
+
+function agree() {
+    $('#terms').prop('checked', true);
+
+
+
+}

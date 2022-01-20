@@ -18,6 +18,46 @@ class VisaCarSeriousIlnessController extends Controller
             'apply' => 'required',
             'Full_Name' => 'required',
             'email' => 'required',
+            'Beneficiary_Email' => ['required_if:apply,Child,Spouse,Parent',
+                function ($attribute, $value, $fail) {
+                    if ($value=='' ||  preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },
+            ],
+            'beneficiary_name' => ['required_if:apply,Child,Spouse,Parent',
+                function ($attribute, $value, $fail) {
+                    if ($value=='' || preg_match('/^[a-zA-Z][a-zA-Z ]{1,127}$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },
+            ],
+            'Beneficiary_Contact_Number' => ['required_if:apply,Child,Spouse,Parent',
+                function ($attribute, $value, $fail) {
+                    if ($value=='' || preg_match('/^[0-9]{10}$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },
+            ],
+            'Relationship' => 'required_if:apply,Child,Spouse,Parent',
+            'beneficiary_dob' => 'required_if:apply,Child,Spouse,Parent',
+            'Beneficiary_NIC' => ['required_if:apply,Spouse,Parent',
+                function ($attribute, $value, $fail) {
+                    if ($value=='' || preg_match('/^([0-9]{12})$/', $value)) {
+                        return true;
+                    } else if ($value=='' || strlen($value) == 10 && preg_match('/^([0-9]{9}[vVxX]{1})$/', $value)) {
+                        return true;
+                    } else {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },
+            ],
             'Contact_Number' => [
                 function ($attribute, $value, $fail) {
                     if (preg_match('/^[0-9]{10}$/', $value)) {
@@ -46,7 +86,7 @@ class VisaCarSeriousIlnessController extends Controller
         ]);
         $token = env("TOKEN");
         $url = env("CEYLINCO_NIC_VALIDATE");
-        $merchant_id= env("MERCHANT_ID");
+        $merchant_id = env("MERCHANT_ID");
         $client1 = new Client();
         $resp = $client1->request('POST', $url, [
             'form_params' => [
@@ -69,8 +109,12 @@ class VisaCarSeriousIlnessController extends Controller
         $data['apply'] = $request->apply;
         $data['plan'] = $request->plan;
         $data['premium'] = $request->premium;
-        $data['Guardian'] = $request->Guardian;
-        $data['Relationship'] = $request->Relationship;
+        $data['beneficiary_name'] = $request->beneficiary_name;
+        $data['beneficiary_nic'] = $request->Beneficiary_NIC;
+        $data['beneficiary_contact'] = $request->Beneficiary_Contact_Number;
+        $data['beneficiary_email'] = $request->Beneficiary_Email;
+        $data['beneficiary_dob'] = $request->beneficiary_dob;
+        $data['beneficiary_relationship'] = $request->Relationship;
         $data['Full_Name'] = $request->Full_Name;
         $data['email'] = $request->email;
         $data['Contact_Number'] = $request->Contact_Number;
@@ -100,10 +144,13 @@ class VisaCarSeriousIlnessController extends Controller
             'nicf' => 'required',
             'nicb' => 'required',
             'policy' => 'required',
+            'nature_of_illness' => ['required_with:seriousillness'],
+            'typeofsurgerie' => ['required_with:majorsurgeries'],
+            'terms' => 'required',
         ]);
 
-        $data = session('serious-illness');
-        dd($data);
+        $data = session('visaS');
+//        dd($data);
 
         $file = $request->file('nicf');
 
@@ -128,7 +175,7 @@ class VisaCarSeriousIlnessController extends Controller
 //dd($front);
         $token = env("TOKEN");
         $url = env("CEYLINCO_VISA_CARD_URL");
-        $merchant_id= env("MERCHANT_ID");
+        $merchant_id = env("MERCHANT_ID");
 
 
         $client = new Client();
@@ -171,12 +218,27 @@ class VisaCarSeriousIlnessController extends Controller
                     'contents' => $data['apply'],
                 ],
                 [
-                    'name' => 'guardian_name',
-                    'contents' => $data['Guardian'],
+                    'name' => 'beneficiary_name',
+                    'contents' => $data['beneficiary_name'],
+                ], [
+                    'name' => 'beneficiary_nic',
+                    'contents' => $data['beneficiary_nic'],
+                ], [
+                    'name' => 'beneficiary_contact',
+                    'contents' => $data['beneficiary_contact'],
+                ], [
+                    'name' => 'beneficiary_email',
+                    'contents' => $data['beneficiary_email'],
                 ],
                 [
-                    'name' => 'relationship',
-                    'contents' => $data['Relationship'],
+                    'name' => 'beneficiary_relationship',
+                    'contents' => $data['beneficiary_relationship'],
+                ], [
+                    'name' => 'beneficiary_dob',
+                    'contents' => $data['beneficiary_dob'],
+                ], [
+                    'name' => 'beneficiary_relationship',
+                    'contents' => $data['beneficiary_relationship'],
                 ],
                 [
                     'name' => 'preferredPlan',
@@ -250,8 +312,11 @@ class VisaCarSeriousIlnessController extends Controller
         }
         $content = $response->getBody();
         $array = json_decode($content, true);
-
-        return Redirect::to($array['paymentLink']);
+        if ($array['success']) {
+            return Redirect::to($array['paymentLink']);
+        } else {
+            return back()->withInput($request->input())->with('error', $array['message']);
+        }
 
 
     }

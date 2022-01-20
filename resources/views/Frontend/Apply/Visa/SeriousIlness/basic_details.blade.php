@@ -24,6 +24,7 @@
                 <form method="post" class="needs-validation" action="{{url("/visa/basic_details")}}" novalidate>
                     @csrf
                     <input type="hidden" value="{{$premium}}" name="premium">
+                    <input type="hidden" value="{{$plan}}" name="plan">
                     <div class="row">
                         <div class="col-md-4">
                             <label for="apply">You apply this policy for</label>
@@ -31,6 +32,8 @@
                                 <option selected disabled hidden>Please Select</option>
                                 <option {{ old('apply')=='Yourself'?'selected':'' }}>Yourself</option>
                                 <option {{ old('apply')=='Child'?'selected':'' }}>Child</option>
+                                <option {{ old('apply')=='Spouse'?'selected':'' }}>Spouse</option>
+                                <option {{ old('apply')=='Parent'?'selected':'' }}>Parent</option>
 
                             </select>
 
@@ -56,7 +59,7 @@
                             @enderror
                         </div>
                         <div class="col-md-10 mb-3">
-                            <label for="validationCustom01">Full Name</label>
+                            <label for="validationCustom01">Full Name of the Insured</label>
                             <input type="text" name="Full_Name" value="{{old('Full_Name')}}" class="form-control"
                                    id="validationCustom01"
                                    placeholder="Full Name" required>
@@ -98,24 +101,8 @@
                         </div>
                     </div>
                     <div class="row Child">
-                        <div class="col-md-6 mb-3">
-                            <label id="Guardian" for="nic">Name of the Guardian</label>
-                            <input type="text" name="Guardian" class="form-control" value="{{old('Guardian')}}"
-                                   id="Guardian"
-                                   placeholder="Name of the Guardian" required>
 
-                        </div>
-                        <div class="col-md-6 mb-3">
 
-                            <label for="apply">Relationship</label>
-                            <select name="Relationship" class="form-select" id="apply" required>
-                                <option selected disabled hidden>Please Select</option>
-                                <option {{ old('apply')=='Son'?'selected':'' }}>Son</option>
-                                <option {{ old('apply')=='Daughter'?'selected':'' }}>Daughter</option>
-
-                            </select>
-
-                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -127,7 +114,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="validationCustom03">Permanent Address</label>
+                            <label for="validationCustom03">Address of the Insured</label>
                             <textarea name="Permanent_Address" class="form-control" id="validationCustom04"
                                       placeholder="Permanent Address" required>{{old('Permanent_Address')}}</textarea>
                             @error('Permanent_Address')
@@ -136,79 +123,145 @@
                         </div>
 
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="validationCustom03">Preferred Plan</label>
-                                </div>
-                                <div class="col-md-8">
-
-                                    <div class="form-check form-check-inline">
-                                        <input {{($plan=='Plan 1')?"checked ":"disabled"}} checked
-                                               class="form-check-input"
-                                               type="radio" name="plan" id="inlineRadio1" value="Plan 1">
-                                        <label class="form-check-label" for="inlineRadio1">Plan 1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input {{($plan=='Plan 2')?"checked ":"disabled"}} class="form-check-input"
-                                               type="radio" name="plan" id="inlineRadio2" value="Plan 2">
-                                        <label class="form-check-label" for="inlineRadio2">Plan 2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input {{($plan=='Plan 3')?"checked ":"disabled"}} class="form-check-input"
-                                               type="radio" name="plan" id="inlineRadio3" value="Plan 3">
-                                        <label class="form-check-label" for="inlineRadio3">Plan 3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input {{($plan=='Plan 4')?"checked ":"disabled"}} class="form-check-input"
-                                               type="radio" name="plan" id="inlineRadio4" value="Plan 4">
-                                        <label class="form-check-label" for="inlineRadio4">Plan 4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input {{($plan=='Plan 5')?"checked ":"disabled"}} class="form-check-input"
-                                               type="radio" name="plan" id="inlineRadio5" value="Plan 5">
-                                        <label class="form-check-label" for="inlineRadio5">Plan 5</label>
-                                    </div>
-
-                                </div>
-                            </div>
-                            @error('plan')
+                    <div class="row Child">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom03">Beneficiary Name</label>
+                            <input type="text" name="beneficiary_name" value="{{old('beneficiary_name')}}" class="form-control bb"
+                                   id="validationCustom03"
+                                   placeholder="Beneficiary Name" required>
+                            @error('beneficiary_name')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="col-md-6">
-                            {{--                        <div class="card">--}}
-                            {{--                            <div class="card-body">--}}
-                            {{--                                <table class="table table-borderless table-dark">--}}
-                            {{--                                    <tr>--}}
-                            {{--                                        <td>Hospitalization Benefit within Sri Lanka - Annual/Event Limit</td>--}}
-                            {{--                                        <td class="op1">Rs.100,000</td>--}}
-                            {{--                                    </tr>--}}
-                            {{--                                    <tr>--}}
-                            {{--                                        <td>Total Hospital room charges including admission fees per event</td>--}}
-                            {{--                                        <td class="op2">Rs.30,000</td>--}}
-                            {{--                                    </tr>--}}
-                            {{--                                    <tr>--}}
-                            {{--                                        <td>Specialized services per event</td>--}}
-                            {{--                                        <td class="op3">Rs.20,000</td>--}}
-                            {{--                                    </tr>--}}
-                            {{--                                    <tr>--}}
-                            {{--                                        <td>All other expenses including, Surgeon's & Doctor' charges, Operational--}}
-                            {{--                                            expenses, Medical Expenses and Emergency,Transport per Event--}}
-                            {{--                                        </td>--}}
-                            {{--                                        <td class="op4">Rs.50,000</td>--}}
-                            {{--                                    </tr>--}}
-                            {{--                                    <tr>--}}
-                            {{--                                        <td><h6>PREMIUM WITH TAXES</h6></td>--}}
-                            {{--                                        <td class="op5"><h6>Rs.600--}}
-                            {{--                                            </h6></td>--}}
-                            {{--                                    </tr>--}}
-                            {{--                                </table>--}}
-                            {{--                            </div>--}}
-                            {{--                        </div>--}}
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom04">Beneficiary Contact No</label>
+                            <input type="text" name="Beneficiary_Contact_Number" value="{{old('Beneficiary_Contact_Number')}}"
+                                   class="form-control bb"
+                                   id="validationCustom04"
+                                   placeholder="Beneficiary Contact Number" required>
+                            @error('Beneficiary_Contact_Number')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label id="niclable" for="nic">Beneficiary Email</label>
+                            <input type="text" name="Beneficiary_Email" class="form-control bb" value="{{old('Beneficiary_Email')}}" id="nic"
+                                   placeholder="Beneficiary Email" required>
+                            @error('Beneficiary_Email')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
+                    <div class="row Child">
+                        <div class="col-md-4 mb-3">
+
+                                <label for="apply">Relationship</label>
+                                <select name="Relationship" class="form-select" id="apply" required>
+                                    <option selected disabled hidden>Please Select</option>
+                                    <option {{ old('apply')=='Son'?'selected':'' }}>Son</option>
+                                    <option {{ old('apply')=='Daughter'?'selected':'' }}>Daughter</option>
+                                    <option {{ old('apply')=='Father'?'selected':'' }}>Father</option>
+                                    <option {{ old('apply')=='Mother'?'selected':'' }}>Mother</option>
+                                    <option {{ old('apply')=='Husband'?'selected':'' }}>Husband</option>
+                                    <option {{ old('apply')=='Wife'?'selected':'' }}>Wife</option>
+
+                                </select>
+
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom04">Beneficiary DOB</label>
+                            <input type="date" name="beneficiary_dob" value="{{old('beneficiary_dob')}}"
+                                   class="form-control bb"
+                                   id="validationCustom04"
+                                   placeholder="Beneficiary Contact Number" required>
+                            @error('beneficiary_dob')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="bnic" id="niclable" for="nic">Beneficiary NIC</label>
+                            <input type="email" name="Beneficiary_NIC" class="form-control bnic bb" value="{{old('Beneficiary_NIC')}}" id="bnic"
+                                   placeholder="Beneficiary NIC" required>
+                            @error('Beneficiary_NIC')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+
+{{--                    <div class="row">--}}
+{{--                        <div class="col-md-6 mb-3">--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-md-4">--}}
+{{--                                    <label for="validationCustom03">Preferred Plan</label>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-md-8">--}}
+
+{{--                                    <div class="form-check form-check-inline">--}}
+{{--                                        <input {{($plan=='Plan 1')?"checked ":"disabled"}} checked--}}
+{{--                                               class="form-check-input"--}}
+{{--                                               type="radio" name="plan" id="inlineRadio1" value="Plan 1">--}}
+{{--                                        <label class="form-check-label" for="inlineRadio1">Plan 1</label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="form-check form-check-inline">--}}
+{{--                                        <input {{($plan=='Plan 2')?"checked ":"disabled"}} class="form-check-input"--}}
+{{--                                               type="radio" name="plan" id="inlineRadio2" value="Plan 2">--}}
+{{--                                        <label class="form-check-label" for="inlineRadio2">Plan 2</label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="form-check form-check-inline">--}}
+{{--                                        <input {{($plan=='Plan 3')?"checked ":"disabled"}} class="form-check-input"--}}
+{{--                                               type="radio" name="plan" id="inlineRadio3" value="Plan 3">--}}
+{{--                                        <label class="form-check-label" for="inlineRadio3">Plan 3</label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="form-check form-check-inline">--}}
+{{--                                        <input {{($plan=='Plan 4')?"checked ":"disabled"}} class="form-check-input"--}}
+{{--                                               type="radio" name="plan" id="inlineRadio4" value="Plan 4">--}}
+{{--                                        <label class="form-check-label" for="inlineRadio4">Plan 4</label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="form-check form-check-inline">--}}
+{{--                                        <input {{($plan=='Plan 5')?"checked ":"disabled"}} class="form-check-input"--}}
+{{--                                               type="radio" name="plan" id="inlineRadio5" value="Plan 5">--}}
+{{--                                        <label class="form-check-label" for="inlineRadio5">Plan 5</label>--}}
+{{--                                    </div>--}}
+
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            @error('plan')--}}
+{{--                            <span class="text-danger">{{ $message }}</span>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
+{{--                        <div class="col-md-6">--}}
+{{--                            --}}{{--                        <div class="card">--}}
+{{--                            --}}{{--                            <div class="card-body">--}}
+{{--                            --}}{{--                                <table class="table table-borderless table-dark">--}}
+{{--                            --}}{{--                                    <tr>--}}
+{{--                            --}}{{--                                        <td>Hospitalization Benefit within Sri Lanka - Annual/Event Limit</td>--}}
+{{--                            --}}{{--                                        <td class="op1">Rs.100,000</td>--}}
+{{--                            --}}{{--                                    </tr>--}}
+{{--                            --}}{{--                                    <tr>--}}
+{{--                            --}}{{--                                        <td>Total Hospital room charges including admission fees per event</td>--}}
+{{--                            --}}{{--                                        <td class="op2">Rs.30,000</td>--}}
+{{--                            --}}{{--                                    </tr>--}}
+{{--                            --}}{{--                                    <tr>--}}
+{{--                            --}}{{--                                        <td>Specialized services per event</td>--}}
+{{--                            --}}{{--                                        <td class="op3">Rs.20,000</td>--}}
+{{--                            --}}{{--                                    </tr>--}}
+{{--                            --}}{{--                                    <tr>--}}
+{{--                            --}}{{--                                        <td>All other expenses including, Surgeon's & Doctor' charges, Operational--}}
+{{--                            --}}{{--                                            expenses, Medical Expenses and Emergency,Transport per Event--}}
+{{--                            --}}{{--                                        </td>--}}
+{{--                            --}}{{--                                        <td class="op4">Rs.50,000</td>--}}
+{{--                            --}}{{--                                    </tr>--}}
+{{--                            --}}{{--                                    <tr>--}}
+{{--                            --}}{{--                                        <td><h6>PREMIUM WITH TAXES</h6></td>--}}
+{{--                            --}}{{--                                        <td class="op5"><h6>Rs.600--}}
+{{--                            --}}{{--                                            </h6></td>--}}
+{{--                            --}}{{--                                    </tr>--}}
+{{--                            --}}{{--                                </table>--}}
+{{--                            --}}{{--                            </div>--}}
+{{--                            --}}{{--                        </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
 
                     <div class="row">
@@ -233,11 +286,21 @@
 <script>
     $(document).ready(function () {
         $('.Child').hide();
+
         var plan = "{{$plan}}";
         if ($('#apply').val() == "Child") {
 
-            $('#niclable').text("NIC No of guardian");
+            $('.bnic').hide();
             $('.Child').show();
+        } if($('#apply').val() == "Spouse"){
+
+            $('.Child').show();
+            $('.bnic').show();
+        }
+        if($('#apply').val() == "Parent"){
+            $('.Child').show();
+            $('.bnic').show();
+
         }
         if (plan === 'Plan 1') {
             $('.op1').text("Rs.100,000");
@@ -323,11 +386,17 @@
         $('#apply').on('change', function () {
             if (this.value == 'Child') {
 
-                $('#niclable').text("NIC No of guardian");
+
                 $('.Child').show();
-            } else {
-                $('#niclable').text("NIC");
+                $('.bnic').hide();
+            } else if(this.value == 'Yourself') {
+
                 $('.Child').hide();
+                $('.bb').val('');
+            }else{
+                $('.Child').show();
+                $('.bnic').show();
+
             }
         });
     });

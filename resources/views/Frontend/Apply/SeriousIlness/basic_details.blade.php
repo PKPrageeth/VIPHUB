@@ -138,6 +138,7 @@
                     </div>
                     <div class="row">
                         <input type="hidden" value="{{$plan}}" name="plan"/>
+                        <input type="hidden" value="{{$premium}}" name="premium"/>
 {{--                        <div class="col-md-6 mb-3">--}}
 {{--                            <div class="row">--}}
 {{--                                <div class="col-md-4">--}}

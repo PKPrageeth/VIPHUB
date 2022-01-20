@@ -238,6 +238,7 @@ class ThirdPartyController extends Controller
             'nicb' => 'required',
             'vehiC' => 'required',
             'policy' => 'required',
+            'terms' => 'required',
         ]);
 
 

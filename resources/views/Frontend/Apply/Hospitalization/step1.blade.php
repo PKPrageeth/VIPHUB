@@ -33,11 +33,18 @@
                                         illness/disease</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="form-check form-switch">
-                                        <input name="seriousillness" class="form-check-input" type="checkbox"
-                                               id="flexSwitchCheckDefault">
+                                    <div class="row">
+                                        <div class="col-2">NO</div>
+                                        <div class="col-2">
+                                            <div class="form-check form-switch">
+                                                <input {{(old('seriousillness'))?"checked":""}} name="seriousillness"
+                                                       class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
 
+                                            </div>
+                                        </div>
+                                        <div class="col-2">YES</div>
                                     </div>
+
                                 </div>
 
                             </div>
@@ -50,11 +57,18 @@
                                 <div class="col-md-4"><label for="validationCustom01">Diabetes/Hypertension</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="form-check form-switch">
-                                        <input name="diabetes_hypertension" class="form-check-input" type="checkbox"
-                                               id="flexSwitchCheckDefault">
+                                    <div class="row">
+                                        <div class="col-2">NO</div>
+                                        <div class="col-2">
+                                            <div class="form-check form-switch">
+                                                <input {{(old('diabetes_hypertension'))?"checked":""}} name="diabetes_hypertension"
+                                                       class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
 
+                                            </div>
+                                        </div>
+                                        <div class="col-2">YES</div>
                                     </div>
+
                                 </div>
 
                             </div>
@@ -71,11 +85,19 @@
                                         surgeries or obtained treatment for major illness during past ten (10)
                                         years? </label></div>
                                 <div class="col-md-8">
-                                    <div class="form-check form-switch">
-                                        <input name="majorsurgeries" class="form-check-input" type="checkbox"
-                                               id="flexSwitchCheckDefault">
+                                    <div class="row">
+                                        <div class="col-2">NO</div>
+                                        <div class="col-2">
+                                            <div class="form-check form-switch">
+                                                <input {{(old('majorsurgeries'))?"checked":""}} name="majorsurgeries"
+                                                       class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
 
+
+                                            </div>
+                                        </div>
+                                        <div class="col-2">YES</div>
                                     </div>
+
 
                                 </div>
 
@@ -210,8 +232,49 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row justify-content-end ">
+
+                        <div class="col-12 col-md-4 border p-3">
+                            <div class="form-check">
+                                <input name="terms" class="form-check-input" type="checkbox" value="agree" id="terms">
+                                <label  class="form-check-label" for="defaultCheck1">
+                                    I agree to the <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Terms and Condtions </button>
+                                </label>
+                                @error('terms')
+                                <br>
+                                <span class="text-danger">Please Tick Above to Agree Terms and Condtions</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
                     <hr>
 
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg bg-dark">
+                            <div class="modal-content bg-dark">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Terms and Condtions </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p> In order to process your application we will capture the personal data</p>
+
+                                    <p>  and health data of the insured regarding serious illnesses and surgeries undergone.</p>
+
+
+                                    <p>  I/We declare that the information given in the proposal form is to the best of my/our knowledge and belief, correct and complete in every detail, and will be the basis of the contract between I/we and Ceylinco General Insurance Ltd.</p>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button onclick="agree()" type="button" data-bs-dismiss="modal" class="btn btn-primary">Agree</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row mt-2">
                         <div class="col-md-8"></div>
                         <div class="col-md-2 col-6"><a href="{{url('/')}}" class="btn w-100 btn-danger btn-round"

@@ -210,8 +210,9 @@
 
                             <label for="validationCustom03">Present market value including accessories and spare
                                 parts</label>
-                            <input type="text" name="market_Value" value="{{old('market_Value')}}" class="form-control" data-type="currency" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
-                                placeholder="Present market value"   id="validationCustom03" required>
+                            <input type="text" name="market_Value" value="{{old('market_Value')}}" class="form-control"
+                                   data-type="currency" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
+                                   placeholder="Present market value" id="validationCustom03" required>
                             @error('market_Value')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -220,7 +221,8 @@
                         </div>
                         <div class="col-md-6">
                             <label for="validationCustom03">Year of make</label>
-                            <input type="text" name="yom" value="{{old('yom')}}" class="form-control" placeholder="Year of make"
+                            <input type="text" name="yom" value="{{old('yom')}}" class="form-control"
+                                   placeholder="Year of make"
                                    id="validationCustom03" required>
                             @error('yom')
                             <span class="text-danger">Year of make is invalid.</span>
@@ -241,12 +243,20 @@
                                         free of any damages?</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="form-check form-switch">
-                                        <input {{old('damages')?"checked":""}} name="damages" class="form-check-input"
-                                               type="checkbox"
-                                               id="flexSwitchCheckDefault">
+                                    <div class="row">
+                                        <div class="col-md-2 col-2 text-end">NO</div>
+                                        <div class="col-md-2 col-2 text-center">
+                                            <div class="form-check form-switch w-100">
+                                                <input {{old('damages')?"checked":""}} name="damages"
+                                                       class="form-check-input"
+                                                       type="checkbox"
+                                                       id="flexSwitchCheckDefault">
 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-2 text-start">YES</div>
                                     </div>
+
                                     @error('damages')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -401,11 +411,17 @@
                                 <div class="col-md-4"><label for="validationCustom01">Declaration Received</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="form-check form-switch">
-                                        <input name="declaration" value="{{old('declaration')}}"
-                                               class="form-check-input" type="checkbox"
-                                               id="flexSwitchCheckDefault">
+                                    <div class="row">
+                                        <div class="col-2">NO</div>
+                                        <div class="col-2">
+                                            <div class="form-check form-switch">
+                                                <input name="declaration" value="{{old('declaration')}}"
+                                                       class="form-check-input" type="checkbox"
+                                                       id="flexSwitchCheckDefault">
 
+                                            </div>
+                                        </div>
+                                        <div class="col-2">YES</div>
                                     </div>
                                     @error('declaration')
                                     <span class="text-danger">{{ $message }}</span>
@@ -552,8 +568,44 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row justify-content-end ">
+
+                       <div class="col-12 col-md-4 border p-3">
+                           <div class="form-check">
+                               <input name="terms" class="form-check-input" type="checkbox" value="agree" id="terms">
+                               <label  class="form-check-label" for="defaultCheck1">
+                                   I agree to the <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Terms and Condtions </button>
+                               </label>
+                               @error('terms')
+                               <br>
+                               <span class="text-danger">Please Tick Above to Agree Terms and Condtions</span>
+                               @enderror
+                           </div>
+                       </div>
+                    </div>
+
                     <hr>
 
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg bg-dark">
+                            <div class="modal-content bg-dark">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Terms and Condtions </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button onclick="agree()" type="button" data-bs-dismiss="modal" class="btn btn-primary">Agree</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row mt-2">
                         <div class="col-md-8"></div>
                         <div class="col-md-2 col-6"><a href="{{url('/')}}" class="btn w-100 btn-danger btn-round"
@@ -572,26 +624,26 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script>
-            // Jquery Dependency
+    <script>
+        // Jquery Dependency
 
-            $("input[data-type='currency']").on({
-            keyup: function() {
-            formatCurrency($(this));
-        },
-            blur: function() {
-            formatCurrency($(this), "blur");
-        }
+        $("input[data-type='currency']").on({
+            keyup: function () {
+                formatCurrency($(this));
+            },
+            blur: function () {
+                formatCurrency($(this), "blur");
+            }
         });
 
 
-            function formatNumber(n) {
+        function formatNumber(n) {
             // format number 1000000 to 1,234,567
             return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         }
 
 
-            function formatCurrency(input, blur) {
+        function formatCurrency(input, blur) {
             // appends $ to value, validates decimal side
             // and puts cursor back in right position.
 
@@ -599,7 +651,9 @@
             var input_val = input.val();
 
             // don't validate empty input
-            if (input_val === "") {return;}
+            if (input_val === "") {
+                return;
+            }
 
             // original length
             var original_len = input_val.length;
@@ -610,44 +664,44 @@
             // check for decimal
             if (input_val.indexOf(".") >= 0) {
 
-            // get position of first decimal
-            // this prevents multiple decimals from
-            // being entered
-            var decimal_pos = input_val.indexOf(".");
+                // get position of first decimal
+                // this prevents multiple decimals from
+                // being entered
+                var decimal_pos = input_val.indexOf(".");
 
-            // split number by decimal point
-            var left_side = input_val.substring(0, decimal_pos);
-            var right_side = input_val.substring(decimal_pos);
+                // split number by decimal point
+                var left_side = input_val.substring(0, decimal_pos);
+                var right_side = input_val.substring(decimal_pos);
 
-            // add commas to left side of number
-            left_side = formatNumber(left_side);
+                // add commas to left side of number
+                left_side = formatNumber(left_side);
 
-            // validate right side
-            right_side = formatNumber(right_side);
+                // validate right side
+                right_side = formatNumber(right_side);
 
-            // On blur make sure 2 numbers after decimal
-            if (blur === "blur") {
-            right_side += "00";
-        }
+                // On blur make sure 2 numbers after decimal
+                if (blur === "blur") {
+                    right_side += "00";
+                }
 
-            // Limit decimal to only 2 digits
-            right_side = right_side.substring(0, 2);
+                // Limit decimal to only 2 digits
+                right_side = right_side.substring(0, 2);
 
-            // join number by .
-            input_val =  left_side + "." + right_side;
+                // join number by .
+                input_val = left_side + "." + right_side;
 
-        } else {
-            // no decimal entered
-            // add commas to number
-            // remove all non-digits
-            input_val = formatNumber(input_val);
-            input_val =  input_val;
+            } else {
+                // no decimal entered
+                // add commas to number
+                // remove all non-digits
+                input_val = formatNumber(input_val);
+                input_val = input_val;
 
-            // final formatting
-            if (blur === "blur") {
-            input_val += ".00";
-        }
-        }
+                // final formatting
+                if (blur === "blur") {
+                    input_val += ".00";
+                }
+            }
 
             // send updated string to input
             input.val(input_val);
